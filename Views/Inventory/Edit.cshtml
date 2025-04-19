@@ -1,0 +1,77 @@
+﻿@{
+}
+@model Bigtoria.ViewModels.CreateProductViewModel;
+
+<div class="content">
+    <div class="message card">
+        <p><b>INVENTORIO - EDITAR</b></p>
+    </div>
+    <div class="filter card">
+        <h2>ID: @Model.Product.Id</h2>
+        <a class="btn-close" asp-controller="Inventory" asp-action="Index"><i class="fa-regular fa-circle-xmark"></i></a>
+    </div>
+    <div class="delivery-content card">
+        <form class="row" method="post" asp-controller="Inventory" asp-action="Edit" enctype="multipart/form-data">
+            <div class="col">
+                <div>
+                    <label for="name" class="label-form">Nombre</label>
+                    <input class="input-form" type="text" name="Name" asp-for="Product.Name" required />
+                </div>
+                <div>
+                    <label for="Description" class="label-form">Descripción</label>
+                    <textarea class="textarea-form" cols="40" rows="5" name="Description" asp-for="Product.Description" required></textarea>
+                </div>
+                <div>
+                    <label for="CategoryName" class="label-form">Categoria</label>
+                    <select id="select-category" class="select-form">
+                        <option value="" disabled selected>Seleccione...</option>
+                        @if (Model != null && Model.Categories.Count > 0)
+                        {
+                            foreach (var item in Model.Categories)
+                            {
+                                if (item.Name == Model.Product.CategoryName)
+                                {
+                                    <option value="@item.Id" selected>@item.Name</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+                            }
+                        }
+                        <option value="new">Nuevo</option>
+                    </select>
+                    <input id="input-category" type="text" class="input-form" name="CategoryName" asp-for="Product.CategoryName" required hidden />
+                </div>
+                <div>
+                    <label for="ShowStore" class="label-form">Mostrar en tienda</label>
+                    <select class="select-form" name="ShowStore" asp-for="Product.ShowStore" required>
+                        <option value="" disabled selected>Seleccione...</option>
+                        <option value="true">Si</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="Price" class="label-form">Precio</label>
+                    <input class="input-form" type="number" name="Price" asp-for="Product.Price" step="0.1" required />
+                </div>
+                <div>
+                    <label for="Stock" class="label-form">Stock</label>
+                    <input class="input-form" type="number" name="Stock" asp-for="Product.Stock" step="0.1" required />
+                </div>
+                <div>
+                    <label for="Discount" class="label-form">Descuento</label>
+                    <input class="input-form" type="number" name="Discount" asp-for="Product.Discount" step="0.1" required />
+                </div>
+            </div>
+            <div class="col">
+                <div>
+                    <label for="Discount" class="label-form">Imagen</label>
+                    <input class="file-form" type="file" name="Image" asp-for="Product.Image" />
+                </div>
+                <img class="img-product" src="@Model.Product.ImagePath" alt="" />
+                <button type="submit" class="btn-fill">Actualizar</button>
+            </div>
+        </form>
+    </div>
+</div>

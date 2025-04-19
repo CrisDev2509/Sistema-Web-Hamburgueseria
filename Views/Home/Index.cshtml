@@ -1,0 +1,70 @@
+﻿@model Bigtoria.ViewModels.HomeViewModel;
+
+<div class="content">
+    <div class="message card">
+        <p>Bienvenido <b>@(Model.Name)</b></p>
+    </div>
+    <div class="information">
+        <div class="card-information card">
+            <div class="info-header">
+                <i class="fa-solid fa-sack-dollar"></i>
+                <h3>VENTAS TOTALES</h3>
+            </div>
+            <div class="info-body">
+                <h2>S/. @Model.TotalSales</h2>
+            </div>
+        </div>
+        <div class="card-information card">
+            <div class="info-header">
+                <i class="fa-solid fa-burger"></i>
+                <h3>TOTAL INVENTARIO</h3>
+            </div>
+            <div class="info-body">
+                <h2>@Model.Inventory</h2>
+            </div>
+        </div>
+        <div class="card-information card">
+            <div class="info-header">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <h3>ORDENES</h3>
+            </div>
+            <div class="info-body">
+                <h2>@Model.Orders</h2>
+            </div>
+        </div>
+        <div class="card-information card">
+            <div class="info-header">
+                <i class="fa-solid fa-truck-fast"></i>
+                <h3>PEDIDOS</h3>
+            </div>
+            <div class="info-body">
+                <h2>@Model.Delivery</h2>
+            </div>
+        </div>
+    </div>
+    <div class="information-statistics">
+        <div class="statistics card">
+            <div id="chart">
+                
+            </div>
+        </div>
+        <div class="employee card">
+            <h3>Empleados</h3>
+            <div class="employee-rank">
+                @for (int i = 0; i < Model.Employee.Count(); i++)
+                {
+                    <div class="employee-card @(i == 0 ? "first" : "")">
+                        @if(i == 0)
+                        {
+                            <h3># @(i + 1)</h3>
+                        }
+                        <div>
+                            <p>@Model.Employee[i].Fullname</p>
+                            <h3>S/. @Model.Employee[i].Total.ToString("F2")</h3>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

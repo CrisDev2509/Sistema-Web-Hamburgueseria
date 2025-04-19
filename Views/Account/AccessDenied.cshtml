@@ -1,0 +1,10 @@
+﻿@{
+    ViewData["Title"] = "Acceso denegado";
+}
+@model string;
+
+<div class="denied">
+    <i class="fa-solid fa-lock"></i>
+    <p>Acesso denegado, no cuenta con los permisos para acceder a esta vista</p>
+    <a asp-controller="Account" asp-action="Index" class="btn-fill">Regresar</a>
+</div>

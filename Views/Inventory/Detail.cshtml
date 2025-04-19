@@ -1,0 +1,50 @@
+﻿@{
+}
+@model Bigtoria.ViewModels.ProductViewModel;
+
+<div class="content">
+    <div class="message card">
+        <p><b>INVENTORIO - DETALLE</b></p>
+    </div>
+    <div class="filter card">
+        <h2>ID: @Model.Id</h2>
+        <a class="btn-close" asp-controller="Inventory" asp-action="Index"><i class="fa-regular fa-circle-xmark"></i></a>
+    </div>
+    <div class="delivery-content card">
+        <div class="row">
+            <div class="col">
+                <div>
+                    <label for="name" class="label-form">Nombre</label>
+                    <input class="input-form" type="text" name="Name" value="@Model.Name" readonly />
+                </div>
+                <div>
+                    <label for="Description" class="label-form">Descripción</label>
+                    <textarea class="textarea-form" cols="40" rows="5" name="Description"readonly>@Model.Description</textarea>
+                </div>
+                <div>
+                    <label for="CategoryName" class="label-form">Categoria</label>
+                    <input id="input-category" type="text" class="input-form" name="CategoryName" asp-for="CategoryName" readonly />
+                </div>
+                <div>
+                    <label for="ShowStore" class="label-form">Mostrar en tienda</label>
+                    <input type="text" class="input-form" value="@(Model.ShowStore ? "Si" : "No")"/>
+                </div>
+                <div>
+                    <label for="Price" class="label-form">Precio</label>
+                    <input class="input-form" type="text" name="Price" value="@Model.Price" readonly />
+                </div>
+                <div>
+                    <label for="Stock" class="label-form">Stock</label>
+                    <input class="input-form" type="number" name="Stock" value="@Model.Stock" readonly />
+                </div>
+                <div>
+                    <label for="Discount" class="label-form">Descuento</label>
+                    <input class="input-form" type="number" name="Discount" value="@Model.Discount" readonly />
+                </div>
+            </div>
+            <div class="col">
+                <img class="img-product" src="@Model.ImagePath" alt="" />
+            </div>
+        </div>
+    </div>
+</div>

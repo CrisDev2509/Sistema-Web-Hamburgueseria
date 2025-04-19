@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Bigtoria</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link href="~/css/component.css" rel="stylesheet" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Bigtoria.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/home.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/css/sales.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/delivery.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/toast.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="menu">
+        <div class="m-header">
+            <img class="logo" src="~/img/logo.png" alt="Bigtoria burger" />
+            <span class="logo-text">Bigtoria burger</span>
+        </div>
+        <div class="h-sep"></div>
+        <div class="m-body">
+            <ul class="menu-item">
+                <li><a class="@(ViewData["Select"]?.ToString() == "HOME" ? "select-item" : "")" asp-controller="Home" asp-action="Index"><i class="fa-solid fa-table-cells-large fa-xl"></i><span>HOME</span></a></li>
+                <li><a class="@(ViewData["Select"]?.ToString() == "SALES" ? "select-item" : "")" asp-controller="Sale" asp-action="Index"><i class="fa-solid fa-tag fa-xl"></i><span>VENTAS</span></a></li>
+                <li><a class="@(ViewData["Select"]?.ToString() == "DELIVERY" ? "select-item" : "")" asp-controller="Delivery" asp-action="Index"><i class="fa-solid fa-truck-fast fa-xl"></i><span>PEDIDOS</span></a></li>
+                <li><a class="@(ViewData["Select"]?.ToString() == "INVENTORY" ? "select-item" : "")" asp-controller="Inventory" asp-action="Index"><i class="fa-solid fa-list-check fa-xl"></i><span>INVENTARIO</span></a></li>
+                <li><a class="@(ViewData["Select"]?.ToString() == "REPORTS" ? "select-item" : "")" asp-controller="Report" asp-action="Index"><i class="fa-solid fa-chart-pie fa-xl"></i><span>REPORTES</span></a></li>
+                @if (User.Claims.Where(c => c.Type == "EmployeeId").Select(c => c.Value).FirstOrDefault()?.ToString() == "1")
+                {
+                    <li><a class="@(ViewData["Select"]?.ToString() == "EMPLOYEE" ? "select-item" : "")" asp-controller="Employee" asp-action="Index"><i class="fa-solid fa-users fa-xl"></i><span>EMPLEADOS</span></a></li>
+                }
+                <li><a class="@(ViewData["Select"]?.ToString() == "ACCOUNT" ? "select-item" : "")" asp-controller="Account" asp-action="Index"><i class="fa-solid fa-user fa-xl"></i><span>CUENTA</span></a></li>
+            </ul>
+        </div>
+        <div class="h-sep"></div>
+        <div class="m-footer">
+            <ul>
+                <li><a><i class="fa-solid fa-headset"></i><span>SOPORTE</span></a></li>
+                <li><a asp-controller="Acceso" asp-action="Login"><i class="fa-solid fa-right-from-bracket"></i><span>SALIR</span></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+	<div class="contenedor">
+		<div class="contenedor-toast" id="contenedor-toast">
+			    
+		</div>
+	</div>
+
+    <script src="~/lib/echarts-master/dist/echarts.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/component.js"></script>
+    <script src="~/js/category.js"></script>
+    <script src="~/js/toast.js"></script>
+    <script src="https://kit.fontawesome.com/c2bff0d639.js" crossorigin="anonymous"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

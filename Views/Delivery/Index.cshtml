@@ -1,0 +1,58 @@
+﻿@{
+}
+@model IEnumerable<Bigtoria.ViewModels.DeliveryViewModel>;
+
+<div class="content">
+    <div class="message card">
+        <p><b>PEDIDOS</b></p>
+    </div>
+    <div class="filter card">
+        <div>
+            <a asp-controller="Delivery" asp-action="Index" asp-route-filter="-2" class="@(ViewData["filter"]?.ToString() == "-2" ? "btn-filter-select" : "btn-filter")">Todos</a>
+            <a asp-controller="Delivery" asp-action="Index" asp-route-filter="1" class="@(ViewData["filter"]?.ToString() == "1" ? "btn-filter-select" : "btn-filter")">Completado</a>
+            <a asp-controller="Delivery" asp-action="Index" asp-route-filter="0" class="@(ViewData["filter"]?.ToString() == "0" ? "btn-filter-select" : "btn-filter")">Pendiente</a>
+            <a asp-controller="Delivery" asp-action="Index" asp-route-filter="-1" class="@(ViewData["filter"]?.ToString() == "-1" ? "btn-filter-select" : "btn-filter")">Cancelado</a>
+        </div>
+    </div>
+    <div class="delivery-content card">
+        @if (Model != null && Model.Count() > 0)
+        {
+            <div class="table-content">
+                <table class="table">
+                    <thead class="table-head">
+                        <tr>
+                            <th scope="row">ID</th>
+                            <th scope="row">CLIENTE</th>
+                            <th scope="row">DETALLE</th>
+                            <th scope="row">FECHA</th>
+                            <th scope="row">ESTADO</th>
+                            <th scope="row"><i class="fa-solid fa-eye"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-body">
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td style="text-align: center">@item.Id</td>
+                                <td>@item.ClientName</td>
+                                <td>@(item.Detail.Length > 50 ? item.Detail.Substring(0, 50) + "..." : item.Detail)</td>
+                                <td style="text-align: center">@item.Date.ToString("dd/MM/yyyy HH:mm")</td>
+                                <td style="text-align: center"><span class="status @(item.Status == 0 ? "pending" : item.Status == 1 ? "complete" : "canceled")">@(item.Status == 0 ? "Pendiente" : item.Status == 1 ? "Completado" : "Cancelado")</span></td>
+                                <td style="text-align: center"><a class="btn-table edit-view" asp-controller="Delivery" asp-action="Detail" asp-route-id="@item.Id"><i class="fa-solid fa-eye"></i></a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="info-none">
+                No hay pedidos disponibles
+            </div>
+        }
+        <div class="paginaion">
+
+        </div>
+    </div>
+</div>

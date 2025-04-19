@@ -1,0 +1,114 @@
+﻿@{
+    Layout = null;
+}
+@model Bigtoria.ViewModels.SalesViewModel;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carta digital</title>
+    <link rel="stylesheet" href="~/css/DigitalCard.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="content">
+        <div class="product-content card">
+            @if (Model.Products.Count() > 0)
+            {
+                foreach (var item in Model.Products)
+                {
+                    <div class="product-card" data-id-product="@item.Id">
+                        <img src="@item.ImagePath" alt="" />
+                        <div class="product-card-info">
+                            <p>@item.Name</p>
+                            <h3>S/. @item.Price</h3>
+                        </div>
+                        @if (item.Stock > 0)
+                        {
+                            <div id="product-info" class="product-info">
+                                @item.Description
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="out-stock">
+                                <img src="~/img/no-stock.png" alt="" />
+                            </div>
+                        }
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="info-none">
+                    No hay productos para mostrar
+                </div>
+            }
+        </div>
+
+        <div class="shopping">
+            <input type="checkbox" id="btn-show" />
+            <div class="shop card">
+                <div class="shop-header">
+                    <h3>Orden</h3>
+                    @if (Bigtoria.utils.SalesProduct.products.Count > 0)
+                    {
+                        <i id="delete-all-shop" class="fa-solid fa-trash"></i>
+                    }
+                </div>
+                <div class="shop-content">
+                    @if (Bigtoria.utils.SalesProduct.products.Count > 0)
+                    {
+                        foreach (var item in Bigtoria.utils.SalesProduct.products)
+                        {
+                            <div class="card-sale">
+                                <p class="p-name">@item.Name</p>
+                                <h4 class="p-price">S/. @item.Price</h4>
+                                <i class="fa-solid fa-circle-minus subs-quantity" data-id-item="@item.Id"></i>
+                                <p class="p-quantity">@item.Quantity</p>
+                                <i class="fa-solid fa-circle-plus add-quantity" data-id-item="@item.Id"></i>
+                                <i class="fa-solid fa-trash delete-item-shop" data-id-sale="@item.Id"></i>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="info-none">
+                            <i class="fa-solid fa-circle-info"></i>
+                            No hay pedidos
+                        </div>
+                    }
+                </div>
+                <div class="shop-total">
+                    <p><b>IGV:</b> S/. @Bigtoria.utils.SalesProduct.getIgv()</p>
+                    <p><b>SUB-TOTAL:</b> S/. @Bigtoria.utils.SalesProduct.getSubTotal()</p>
+                    <h2>TOTAL: S/. @Bigtoria.utils.SalesProduct.getAmmount()</h2>
+                </div>
+                @if (Bigtoria.utils.SalesProduct.products.Count > 0)
+                {
+                    <div class="payment">
+                        <a class="btn-payment" asp-action="Shop" asp-controller="UserCard">PAGAR</a>
+                    </div>
+                }
+            </div>
+            <div class="btn-show">
+                <label for="btn-show"><i class="fa-solid fa-cart-shopping"></i></label>
+            </div>
+        </div>
+
+        @if (TempData["Message"] != null)
+        {
+            <div class="Message">
+                <h2>@TempData["Message"]</h2>
+                <a class="btn-payment" asp-action="Index" asp-controller="UserCard">OK</a>
+            </div>
+
+            TempData["Message"] = null;
+        }
+    </div>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/component.js"></script>
+    <script src="https://kit.fontawesome.com/c2bff0d639.js" crossorigin="anonymous"></script>
+</body>
+</html>

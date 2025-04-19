@@ -1,0 +1,61 @@
+﻿@{
+}
+@model Bigtoria.ViewModels.EmployeeViewModel;
+
+<div class="content">
+    <div class="message card">
+        <p><b>EMPLEADO - DETALLE</b></p>
+    </div>
+    <div class="filter card">
+        <h2>ID: @Model.Id</h2>
+        <a class="btn-close" asp-controller="Employee" asp-action="Index"><i class="fa-regular fa-circle-xmark"></i></a>
+    </div>
+    <div class="delivery-content card">
+        <div class="row">
+            <div class="col">
+                <div>
+                    <label for="name" class="label-form">Nombre</label>
+                    <input class="input-form" type="text" name="Name" asp-for="Name" readonly />
+                </div>
+                <div>
+                    <label for="Lastname" class="label-form">Apellidos</label>
+                    <input type="text" class="input-form" name="Lastname" asp-for="Lastname" readonly />
+                </div>
+                <div>
+                    <label for="Birthdate" class="label-form">Fecha de nacimiento</label>
+                    <input type="date" class="input-form" name="Birthdate" asp-for="Birthdate" readonly />
+                </div>
+                <div>
+                    <label for="Email" class="label-form">Correo</label>
+                    <input class="input-form" type="text" name="Email" asp-for="Email" readonly />
+                </div>
+                <div>
+                    <label for="Phone" class="label-form">Numero de celular</label>
+                    <input class="input-form" type="text" name="Phone" asp-for="Phone" readonly />
+                </div>
+                <div>
+                    <label for="Salary" class="label-form">Salario</label>
+                    <input class="input-form" type="number" name="Salary" asp-for="Salary" readonly />
+                </div>
+                <div>
+                    <label for="Type" class="label-form">Tipo de empleado</label>
+                    <input id="input-category" type="text" class="input-form" name="CategoryType.Name" asp-for="CategoryType.Name" readonly />
+                </div>
+            </div>
+            <div class="col">
+                <div>
+                    <label for="Status" class="label-form">Estado</label>
+                    <input type="text" class="input-form" value="@(Model.Status ? "Activo" : "Inactivo")" readonly />
+                </div>
+                <div>
+                    <label for="Birthdate" class="label-form">Fecha de contrato</label>
+                    <input type="date" class="input-form" name="Birthdate" asp-for="Birthdate" readonly />
+                </div>
+                <div>
+                    <label for="Discount" class="label-form">Imagen</label>
+                </div>
+                <img class="img-product" src="" alt="" />
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,74 @@
+﻿@{
+    ViewData["Title"] = "Cuenta";
+}
+@model Bigtoria.ViewModels.AccountViewModel;
+
+<div class="content">
+    <div class="message card">
+        <p><b>CUENTA</b></p>
+    </div>
+    <div class="filter card">
+        <div>
+            <a class="btn-filter-select">Mi cuenta</a>
+            @if (User.Claims.Where(c => c.Type == "EmployeeId").Select(c => c.Value).FirstOrDefault()?.ToString() == "1")
+            {
+                <a asp-controller="Account" asp-action="Accounts" class="btn-filter">Cuentas</a>
+            }
+        </div>
+    </div>
+    <div class="delivery-content card">
+        <div class="row">
+            <div class="col">
+                <label class="subtitle">Informacion personal</label>
+                <div>
+                    <label for="Name" class="label-form">Nombre</label>
+                    <input class="input-form" type="text" name="Name" asp-for="Name" readonly />
+                </div>
+                <div>
+                    <label for="Lastname" class="label-form">Apellidos</label>
+                    <input class="input-form" type="text" name="Lastname" asp-for="Lastname" readonly />
+                </div>
+                <div>
+                    <label for="Birthdate" class="label-form">Fecha de nacimiento</label>
+                    <input class="input-form" type="text" name="Birthdate" asp-for="Birthdate" readonly />
+                </div>
+                <div>
+                    <label for="PersonalEmail" class="label-form">Correo personal</label>
+                    <input class="input-form" type="text" name="PersonalEmail" asp-for="PersonalEmail" readonly />
+                </div>
+                <div>
+                    <label for="PhoneNumber" class="label-form">Numero de telefono</label>
+                    <input class="input-form" type="text" name="PhoneNumber" asp-for="PhoneNumber" readonly />
+                </div>
+            </div>
+            <div class="col">
+                <label class="subtitle">Información de cuenta</label>
+                <div>
+                    <label for="Email" class="label-form">Correo</label>
+                    <input class="input-form" type="text" name="Email" asp-for="Email" readonly/>
+                </div>
+                <div>
+                    <label for="old-assword" class="label-form">Contraseña</label>
+                    <input class="input-form" type="password" name="old-password" value="@Model.Password" readonly />
+                </div>
+                <div class="input-check">
+                    <input id="change-password" type="checkbox" name="change" />
+                    <label class="label-form" for="change">Cambiar contraseña</label>
+                </div>
+                <div id="content-password">
+                    <form class="col" method="post" asp-controller="Account" asp-action="ChangePassword" asp-route-id="@Model.Id">
+                        <div>
+                            <label for="Password">Nueva contraseña</label>
+                            <input class="input-form" type="password" name="Password" asp-for="Password" required />
+                        </div>
+                        <div>
+                            <label for="RepeatPassword">Repetir contraseña</label>
+                            <input class="input-form" type="password" name="RepeatPassword" asp-for="RepeatPassword" required />
+                        </div>
+                        <button type="submit" class="btn-fill">Cambiar contraseña</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

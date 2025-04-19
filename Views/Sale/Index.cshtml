@@ -1,0 +1,182 @@
+﻿@{
+}
+@model Bigtoria.ViewModels.SalesViewModel;
+
+<div class="content">
+    <div class="message card">
+        <p><b>VENTAS</b></p>
+    </div>
+    <div class="sales-content">
+        <div class="products">
+            <div class="filter card">
+                <div>
+                    <a asp-controller="Sale" asp-action="Index" asp-route-id="0" class="@(ViewData["filter"]?.ToString() == "All" ? "btn-filter-select" : "btn-filter")">Todos</a>
+                    @foreach (var item in Model.Categories)
+                    {
+                        <a asp-controller="Sale" asp-action="Index" asp-route-id="@item.Id" class="@(ViewData["filter"]?.ToString() == item.Name ? "btn-filter-select" : "btn-filter")">@item.Name</a>
+                    }
+                </div>
+            </div>
+            <div class="product-content card">
+                @if(Model.Products.Count() > 0){
+                    foreach (var item in Model.Products)
+                    {
+                        <div class="product-card" data-id-product="@item.Id">
+                            <img src="@item.ImagePath" alt="" />
+                            <div class="product-card-info">
+                                <p>@item.Name</p>
+                                <h3>S/. @item.Price</h3>
+                            </div>
+                            @if(item.Stock > 0){
+                                <div id="product-info" class="product-info">
+                                    @item.Description
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="out-stock">
+                                    <img src="~/img/no-stock.png" alt="" />
+                                </div>
+                            }
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="info-none">
+                        No hay productos para mostrar
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="shop card">
+            <div class="shop-header">
+                <h3>Orden</h3>
+                @if (Bigtoria.utils.SalesProduct.products.Count > 0)
+                {
+                    <i id="delete-all-shop" class="fa-solid fa-trash"></i>
+                }
+            </div>
+            <div class="shop-content">
+                @if(Bigtoria.utils.SalesProduct.products.Count > 0){
+                    foreach(var item in Bigtoria.utils.SalesProduct.products)
+                    {
+                        <div class="card-sale">
+                            <p class="p-name">@item.Name</p>
+                            <h4 class="p-price">S/. @item.Price</h4>
+                            <i class="fa-solid fa-circle-minus subs-quantity" data-id-item="@item.Id"></i>
+                            <p class="p-quantity">@item.Quantity</p>
+                            <i class="fa-solid fa-circle-plus add-quantity" data-id-item="@item.Id"></i>
+                            <i class="fa-solid fa-trash delete-item-shop" data-id-sale="@item.Id"></i>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="info-none">
+                        <i class="fa-solid fa-circle-info"></i>
+                        No hay pedidos
+                    </div>
+                }
+            </div>
+            <div class="shop-total">
+                <p><b>IGV:</b> S/. @Bigtoria.utils.SalesProduct.getIgv()</p>
+                <p><b>SUB-TOTAL:</b> S/. @Bigtoria.utils.SalesProduct.getSubTotal()</p>
+                <h2>TOTAL: S/. @Bigtoria.utils.SalesProduct.getAmmount()</h2>
+            </div>
+            <div class="payment">
+                <a id="btn-process-sale" class="btn-payment">PAGAR</a>
+            </div>
+        </div>
+    </div>
+
+    <!--Modal confirm sale-->
+    <div id="modal" class="modal-content">
+        <div class="modal-form">
+            <div class="modal-header">
+                <h3>Confirmar compra</h3>
+                <a id="btn-close-modal" class="btn-close"><i class="fa-regular fa-circle-xmark"></i></a>
+            </div>
+            <div class="modal-body">
+                <form class="sales-form" id="sales-form" method="post">
+                    <h4>Tipo de venta</h4>
+                    <div class="shop-type">
+                        <div>
+                            <input type="radio" id="store" name="Type" asp-for="Voucher.Type" value="Tienda" checked />
+                            <label for="typeSale">Tienda</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="delivery" name="Type" asp-for="Voucher.Type" value="Delivery" />
+                            <label for="typeSale">delivery</label>
+                        </div>
+                    </div>
+                    <h4 id="title-client" hidden>Informacion del cliente</h4>
+                    <div id="info-delivery" class="info-client row w-100">
+                        <div class="col">
+                            <div>
+                                <label class="label-form" for="Name">Nombres</label>
+                                <input type="text" class="input-form" name="Name" />
+                            </div>
+                            <div>
+                                <label class="label-form" for="Email">Correo</label>
+                                <input type="text" class="input-form" name="Email" />
+                            </div>
+                            <div>
+                                <label class="label-form" for="Address">Direccion</label>
+                                <input type="text" class="input-form" name="Address" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div>
+                                <label class="label-form" for="Lastname">Apellidos</label>
+                                <input type="text" class="input-form" name="Lastname" />
+                            </div>
+                            <div>
+                                <label class="label-form" for="Phone">Telfono</label>
+                                <input type="text" class="input-form" name="Phone" />
+                            </div>
+                            <div>
+                                <label class="label-form" for="Reference">Referencia</label>
+                                <input type="text" class="input-form" name="Reference" />
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Tipo de pago</h4>
+                    <div class="method-payment">
+                        <div>
+                            <input name="Payment" asp-for="Voucher.Payment" type="radio" value="Efectivo" checked />
+                            <label for="Payment">Efectivo</label>
+                        </div>
+                        <div>
+                            <input name="Payment" asp-for="Voucher.Payment" type="radio" value="Tarjeta" />
+                            <label for="Payment">Tarjeta</label>
+                        </div>
+                        <div>
+                            <input name="Payment" asp-for="Voucher.Payment" type="radio" value="E-Wallet" />
+                            <label for="Payment">e-wallet</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a id="btn-cancel-modal" class="btn-modal b-orange">Cancelar</a>
+                <button form="sales-form" type="submit" class="btn-modal f-orange">Comprar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var message = '@ViewData["Message"]';
+    if (message) {
+        // Usamos el mensaje que proviene del controlador
+        var tipo = message.includes("exitosa") || message.includes("exito") ? 'exito' : 'error';
+        agregarToast({
+            tipo: tipo,
+            titulo: tipo === 'exito' ? 'Éxito!' : 'Error',
+            descripcion: message,
+            autoCierre: true
+        });
+    }
+</script>

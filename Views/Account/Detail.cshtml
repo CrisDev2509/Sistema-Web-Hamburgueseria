@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Cuenta";
+}
+@model Bigtoria.ViewModels.AccountViewModel;
+
+<div class="content">
+    <div class="message card">
+        <p><b>ADMINISTRADOR DE CUENTAS - DETALLE</b></p>
+    </div>
+    <div class="filter card">
+        <h2>ID: @Model.Id</h2>
+        <a class="btn-close" asp-controller="Account" asp-action="Accounts"><i class="fa-regular fa-circle-xmark"></i></a>
+    </div>
+    <div class="delivery-content card">
+        <form class="row" method="post" asp-controller="Account" asp-action="Edit">
+            <div class="col">
+                <div>
+                    <label for="Fullname" class="label-form">Empleado</label>
+                    <input class="input-form" type="text" name="Fullname" value="@Model.Name @Model.Lastname" readonly />
+                </div>
+                <label class="subtitle">Informacion de la cuenta</label>
+                <form class="" method="post">
+                    <div>
+                        <label for="Email" class="label-form">Correo</label>
+                        <input class="input-form" type="text" name="Email" asp-for="Email" readonly />
+                    </div>
+                    <div>
+                        <label for="Password" class="label-form">Contraeña</label>
+                        <input class="input-form" type="password" name="Password" asp-for="Password" readonly />
+                    </div>
+                </form>
+            </div>
+        </form>
+    </div>
+</div>
+

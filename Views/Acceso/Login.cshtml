@@ -1,0 +1,35 @@
+﻿@{
+    Layout = null;
+}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Login</title>
+    <link href="~/css/Login.css" rel="stylesheet" asp-append-version="true" />
+
+</head>
+<body>
+    <div class="bg-login">
+        <div class="login-form">
+            <h1>Inicio de sesión</h1>
+            <form asp-controller="Acceso" asp-action="Login" method="post">
+                <div class="input-group">
+                    <label class="form-label" for="Email">Email</label>
+                    <input class="form-input" type="text" id="Email" name="Email" />
+                </div>
+                <div class="input-group">
+                    <label class="form-label" for="Password">Password</label>
+                    <input class="form-input" type="password" id="Password" name="Password" />
+                </div>
+                @if(ViewData["Message"] != null){
+                    <div class="alert-message">
+                        @ViewData["Message"]
+                    </div>
+                }
+                <div class="btn-group">
+                    <button class="btn-login" type="submit">Iniciar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

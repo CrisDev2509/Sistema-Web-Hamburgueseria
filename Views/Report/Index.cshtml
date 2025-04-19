@@ -1,0 +1,49 @@
+﻿@{
+}
+@model List<Bigtoria.ViewModels.ReportViewModel>;
+
+<div class="content">
+    <div class="message card">
+        <p><b>REPORTES</b></p>
+    </div>
+    <div class="filter card">
+        <div>
+            <a class="btn-filter-select">Ventas</a>
+            <a asp-controller="Report" asp-action="EmployeeReport" class="btn-filter">Empleados</a>
+        </div>
+        <div>
+            <a class="btn-filter">Guardar</a>
+        </div>
+    </div>
+    <div class="delivery-content card">
+        <div class="table-content">
+            <table class="table">
+                <thead class="table-head">
+                    <tr>
+                        <th scope="row">ID</th>
+                        <th scope="row">EMPLEADO</th>
+                        <th scope="row">MONTO</th>
+                        <th scope="row">TIPO</th>
+                        <th scope="row">FECHA</th>
+                        <th scope="row">ESTADO</th>
+                    </tr>
+                </thead>
+                <tbody class="table-body clicable">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td style="text-align: center">@item.Id</td>
+                            <td>@item.Employee</td>
+                            <td style="text-align: center">S/. @item.Ammout</td>
+                            <td style="text-align: center">@(item.Type == 1 ? "Tienda" : "Delivery")</td>
+                            <td style="text-align: center">@item.Date.ToString("dd/MM/yyyy HH:mm")</td>
+                            <td style="text-align: center">@(item.State == 1 ? "Vendido" : "Cancelado")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="pagination">
+        </div>
+    </div>
+</div>

@@ -1,0 +1,101 @@
+﻿.information{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.card-information{
+    width: 250px;
+    height: 150px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.info-header{
+    width: 100%;
+    height: 30px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.info-header i {
+    font-size: 18px;
+    color: #DA5E2B;
+}
+
+.info-body{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.info-body h2{
+    font-size: 32px;
+}
+
+.information-statistics{
+    width: 100%;
+    height:  100%;
+    display: flex;
+    gap: 10px;
+}
+
+.statistics{
+    width: 65%;
+    padding: 10px;
+}
+
+.employee {
+    width: 35%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.employee-rank {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-x: auto;
+}
+
+.employee-card {
+    border: 1px solid black;
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+}
+
+.employee-card div{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.first{
+    border: none;
+    height: 80px;
+    background: #DA5E2B;
+    color: #fff;
+}
+
+#chart {
+    width: 100%;
+    height: 100%; /* O cualquier altura que desees */
+}

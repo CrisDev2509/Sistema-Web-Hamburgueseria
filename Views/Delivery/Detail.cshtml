@@ -1,0 +1,70 @@
+﻿@{
+}
+@model Bigtoria.ViewModels.DeliveryViewModel;
+
+<div class="content">
+    <div class="message card">
+        <p><b>PEDIDOS - DETALLE</b></p>
+    </div>
+    <div class="filter card">
+        <h2>ID: @Model.Id</h2>
+        <a class="btn-close" asp-controller="Delivery" asp-action="Index"><i class="fa-regular fa-circle-xmark"></i></a>
+    </div>
+    <div class="delivery-content card">
+        <div class="row">
+            <div class="col">
+                <label class="subtitle">Informacion del cliente</label>
+                <div>
+                    <label for="Client" class="label-form">Cliente</label>
+                    <input class="input-form" type="text" name="Client" value="@Model.ClientName" readonly />
+                </div>
+                <div>
+                    <label for="Address" class="label-form">Direccion</label>
+                    <input type="text" class="input-form"  name="Address" value="@Model.Address" readonly />
+                </div>
+                <div>
+                    <label for="CategoryName" class="label-form">Categoria</label>
+                    <textarea  type="text" class="textarea-form" rows="4" cols="40" name="Reference" readonly>@Model.Reference</textarea>
+                </div>
+                <div>
+                    <label for="ShowStore" class="label-form">Fecha</label>
+                    <input type="text" class="input-form" value="@Model.Date.ToString("dd/MM/yyyy HH:mm")" readonly />
+                </div>
+                <div>
+                    <label for="Price" class="label-form">Tipo de pago</label>
+                    <input class="input-form" type="text" name="Price" value="@Model.Payment" readonly />
+                </div>
+            </div>
+            <div class="col">
+                <label class="subtitle">Informacion del pedido</label>
+                <div class="table-content">
+                    <table class="table">
+                        <thead class="table-head">
+                            <tr>
+                                <th scope="row">PRODUCTO</th>
+                                <th scope="row">CANTIDAD</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-body">
+                            @foreach (var item in Model.Products)
+                            {
+                                <tr>
+                                    <td>@item.Name</td>
+                                    <td style="text-align: center">@item.Quantity</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="btn-delivery">
+            <form method="post" asp-controller="Delivery" asp-action="Canceled" asp-route-id="@Model.Id" style="display: inline">
+                <button type="submit" class="btn-filter">Cancelar pedido</button>
+            </form>
+            <form asp-controller="Delivery" asp-action="Attended" asp-route-id="@Model.Id" method="post" style="display: inline">
+                <button type="submit" class="btn-filter-select">Atender pedido</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,84 @@
+﻿@{
+}
+@model Bigtoria.ViewModels.CreateEmployeeViewModel;
+
+<div class="content">
+    <div class="message card">
+        <p><b>EMPLEADO - INSERTAR NUEVO</b></p>
+    </div>
+    <div class="filter card">
+        <h2>ID: ---</h2>
+        <a class="btn-close" asp-controller="Employee" asp-action="Index"><i class="fa-regular fa-circle-xmark"></i></a>
+    </div>
+    <div class="delivery-content card">
+        <form class="row" method="post" asp-controller="Employee" asp-action="Create" enctype="multipart/form-data">
+            <div class="col">
+                <div>
+                    <label for="name" class="label-form">Nombre</label>
+                    <input class="input-form" type="text" name="Name" asp-for="Employee.Name" required />
+                </div>
+                <div>
+                    <label for="Lastname" class="label-form">Apellidos</label>
+                    <input type="text" class="input-form" name="Lastname" asp-for="Employee.Lastname" required />
+                </div>
+                <div>
+                    <label for="Birthdate" class="label-form">Fecha de nacimiento</label>
+                    <input type="date" class="input-form" name="Birthdate" asp-for="Employee.Birthdate" required />
+                </div>
+                <div>
+                    <label for="Email" class="label-form">Correo</label>
+                    <input class="input-form" type="text" name="Email" asp-for="Employee.Email" required />
+                </div>
+                <div>
+                    <label for="Phone" class="label-form">Numero de celular</label>
+                    <input class="input-form" type="text" name="Phone" asp-for="Employee.Phone" required />
+                </div>
+                <div>
+                    <label for="Salary" class="label-form">Salario</label>
+                    <input class="input-form" type="number" name="Salary" asp-for="Employee.Salary" value="0.0" step="0.1" required />
+                </div>
+                <div>
+                    <label for="Type" class="label-form">Tipo de empleado</label>
+                    <select id="select-category" class="select-form" name="CategoryType.IdCategoryType" asp-for="Employee.CategoryType.IdCategoryType">
+                        <option value="" disabled selected>Seleccione...</option>
+                        @if (Model != null && Model.Categories != null && Model.Categories.Count > 0)
+                        {
+                            foreach (var item in Model.Categories)
+                            {
+                                if (Model.Employee != null && item.Name == Model.Employee.CategoryType.Name)
+                                {
+                                    <option value="@item.IdCategoryType" selected>@item.Name</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.IdCategoryType">@item.Name</option>
+                                }
+                            }
+                        }
+                        <option value="0">Nuevo</option>
+                    </select>
+                    <input id="input-category" type="text" class="input-form" name="CategoryType.Name" asp-for="Employee.CategoryType.Name" required hidden />
+                </div>
+            </div>
+            <div class="col">
+                <div>
+                    <label for="Status" class="label-form">Estado</label>
+                    <select name="Status" asp-for="Employee.Status" class="select-form">
+                        <option value="true" selected>Activo</option>
+                        <option value="false">Inactivo</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="Birthdate" class="label-form">Fecha de contrato</label>
+                    <input type="date" class="input-form" name="Birthdate" asp-for="Employee.Birthdate" required />
+                </div>
+                <div>
+                    <label for="Discount" class="label-form">Imagen</label>
+                    <input class="file-form" type="file" name="Image" asp-for="Employee.Image" value="0.0" />
+                </div>
+                <img class="img-product" src="" alt="" />
+                <button type="submit" class="btn-fill">Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>

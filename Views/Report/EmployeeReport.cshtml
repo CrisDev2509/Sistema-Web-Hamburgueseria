@@ -1,0 +1,52 @@
+﻿@{
+}
+@model Bigtoria.ViewModels.ReportViewModel;
+
+<div class="content">
+    <div class="message card">
+        <p><b>REPORTES - EMPLEADOS</b></p>
+    </div>
+    <div class="filter card">
+        <div>
+            <a asp-controller="Report" asp-action="Index" class="btn-filter">Ventas</a>
+            <a class="btn-filter-select">Empleados</a>
+        </div>
+        <div>
+            <a class="btn-filter">Guardar</a>
+        </div>
+    </div>
+    <div class="delivery-content card">
+        <div class="table-content">
+            <table class="table">
+                <thead class="table-head">
+                    <tr>
+                        <th scope="row">ID</th>
+                        <th scope="row">EMPLEADO</th>
+                        <th scope="row">MONTO ACUMULADO</th>
+                        <th scope="row">RANGO DE FECHAS</th>
+                        <th scope="row">ORDENES</th>
+                    </tr>
+                </thead>
+                <tbody class="table-body clicable">
+                    @foreach (var item in Model.Employees)
+                    {
+                        <tr>
+                            <td style="text-align: center">@item.Id</td>
+                            <td>@item.EmployeeName</td>
+                            <td style="text-align: center">S/. @item.Ammount</td>
+                            <td style="text-align: center">@item.RangeDate</td>
+                            <td style="text-align: center">@item.Orders</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="pagination">
+        </div>
+    </div>
+</div>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}

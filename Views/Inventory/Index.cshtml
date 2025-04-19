@@ -1,0 +1,162 @@
+﻿@{
+}
+@model IEnumerable<Bigtoria.ViewModels.ProductViewModel>;
+
+<div class="content">
+    <div class="message card">
+        <p><b>INVENTORIO</b></p>
+    </div>
+    <div class="filter card">
+        <div>
+            <a class="@((bool)ViewData["filter"] ? "btn-filter-select" : "btn-filter")" asp-controller="Inventory" asp-action="Index">Todos</a>
+            <a class="@(!(bool)ViewData["filter"] ? "btn-filter-select" : "btn-filter")" asp-controller="Inventory" asp-action="Index" asp-route-all="@false">Sin stock</a>
+        </div>
+        @if (ViewData["User"]?.ToString() != "GERENTE" || ViewData["User"]?.ToString() != "ADMINISTRADOR")
+        {
+            <div>
+                <a id="btn-modal-info" class="btn-filter">Categorias</a>
+                <a class="btn-filter" asp-controller="Inventory" asp-action="Create">Nuevo</a>
+            </div>
+        }
+    </div>
+    <div class="delivery-content card">
+        @if (Model.Count() > 0)
+        {
+            <div class="table-content">
+                <table class="table">
+                    <thead class="table-head">
+                        <tr>
+                            <th scope="row">ID</th>
+                            <th scope="row">PRODUCTO</th>
+                            <th scope="row">PRECIO</th>
+                            <th scope="row">STOCK</th>
+                            <th scope="row">DESCUENTO</th>
+                            <th scope="row">ACCIONES</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-body">
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                            <td style="text-align: center">@item.Id</td>
+                            <td>@item.Name</td>
+                            <td style="text-align: center">@item.Price</td>
+                            <td style="text-align: center">@item.Stock</td>
+                            <td style="text-align: center">@item.Discount</td>
+                            <td style="text-align: center">
+                                <div class="btn-action">
+                                    <a class="btn-table edit-view" asp-controller="Inventory" asp-action="Detail" asp-route-id="@item.Id"><i class="fa-solid fa-eye"></i></a>
+                                    <a class="btn-table edit-view" asp-controller="Inventory" asp-action="Edit" asp-route-id="@item.Id"><i class="fa-solid fa-pen"></i></a>
+                                    <a class="btn-table delete" data-path="/Inventory/Delete/" data-id="@item.Id"><i class="fa-solid fa-trash"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                       }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="info-none">
+                @if ((bool)ViewData["filter"])
+                {
+                    <p>No cuenta con prodctos en su inventario, agregue uno nuevo</p>
+                    <a class="btn-filter" style="font-size: 14px;" asp-controller="Inventory" asp-action="Create">Agregar</a>
+                }
+                else
+                {
+                    <p>No cuenta con prodctos en esta sección</p>
+                }
+            </div>
+        }
+        <div class="paginaion">
+        </div>
+    </div>
+
+    <!--Modal-->
+    <div id="modal" class="modal-content">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h3>Sistema de ventas</h3>
+                <a id="btn-close-modal" class="btn-close btn-close-modal"><i class="fa-regular fa-circle-xmark"></i></a>
+            </div>
+            <div class="modal-body">
+                <div class="alert-message">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <p>¿Estas seguro que deseas eliminar este producto?</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a id="btn-cancel-modal" class="btn-modal b-red">No</a>
+                <a id="btn-confirm-delete" class="btn-modal f-red">Si</a>
+            </div>
+        </div>
+    </div>
+
+
+    <!--Modal-->
+    <div id="modal-info" class="modal-content">
+        <div id="category" class="modal-categories">
+            <div class="modal-header">
+                <h3>Categorias</h3>
+                <a id="btn-close-modal" class="btn-close btn-close-modal"><i class="fa-regular fa-circle-xmark"></i></a>
+            </div>
+            <div class="modal-body">
+                <div class="row-modal">
+                    <div class="col">
+                        <h4>Registro de categorias</h4>
+                        <div>
+                            <form id="formCategoria" class="col">
+                                <div>
+                                    <input id="categoryId" class="input-form" type="hidden" name="Name" />
+                                </div>
+                                <div>
+                                    <label for="name" class="label-form">Nueva categoria</label>
+                                    <input id="name" class="input-form" type="text" name="Name" required />
+                                </div>
+                                <div>
+                                    <label for="ShowStore" class="label-form">Estado</label>
+                                    <select id="status" class="select-form" name="ShowStore" required>
+                                        <option value="" disabled selected>Seleccione...</option>
+                                        <option value="1">Activo</option>
+                                        <option value="0">Inactivo</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="ShowStore" class="label-form">Mostrar en filtros</label>
+                                    <select id="showFilter" class="select-form" name="ShowStore" required>
+                                        <option value="" disabled selected>Seleccione...</option>
+                                        <option value="true">Si</option>
+                                        <option value="false">No</option>
+                                    </select>
+                                </div>
+                                <button id="btnEnviar" type="submit" class="btn-fill">Guardar</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <h4>Lista de categorias</h4>
+                        <div class="table-content">
+                            <table id="tb-categoria" class="table">
+                                <thead class="table-head">
+                                    <tr>
+                                        <th scope="row">ID</th>
+                                        <th scope="row">CATEGORIA</th>
+                                        <th scope="row">ESTADO</th>
+                                        <th scope="row">VISIBLE</th>
+                                        <th scope="row">ACCIONES</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="table-body">
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

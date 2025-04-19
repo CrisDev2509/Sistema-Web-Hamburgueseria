@@ -1,0 +1,97 @@
+﻿@{
+    Layout = null;
+}
+@model Bigtoria.ViewModels.SalesViewModel;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carta digital</title>
+    <link rel="stylesheet" href="~/css/DigitalCard.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/component.css" asp-append-version="true"/>
+</head>
+<body>
+    <div class="content card">
+        <form class="sales-form" id="sales-form" method="post">
+            <h4 id="title-client" hidden>Informacion del cliente</h4>
+            <div id="info-delivery" class="info-client row w-100">
+                <div class="col">
+                    <div>
+                        <label class="label-form" for="Name">Nombres</label>
+                        <input type="text" class="input-form" name="Name" />
+                    </div>
+                    <div>
+                        <label class="label-form" for="Email">Correo</label>
+                        <input type="text" class="input-form" name="Email" />
+                    </div>
+                </div>
+                <div class="col">
+                    <div>
+                        <label class="label-form" for="Lastname">Apellidos</label>
+                        <input type="text" class="input-form" name="Lastname" />
+                    </div>
+                    <div>
+                        <label class="label-form" for="Phone">Telfono</label>
+                        <input type="text" class="input-form" name="Phone" />
+                    </div>
+                </div>
+            </div>
+            <h4>Tipo de pago</h4>
+            <div class="method-payment">
+                <div>
+                    <input name="Payment" asp-for="Voucher.Payment" type="radio" value="Efectivo" checked />
+                    <label for="Payment">Efectivo</label>
+                </div>
+                <div>
+                    <input name="Payment" asp-for="Voucher.Payment" type="radio" value="Tarjeta" />
+                    <label for="Payment">Tarjeta</label>
+                </div>
+                <div>
+                    <input name="Payment" asp-for="Voucher.Payment" type="radio" value="E-Wallet" />
+                    <label for="Payment">e-wallet</label>
+                </div>
+            </div>
+            <button class="btn-payment" type="submit">REALIZAR PEDIDO</button>
+        </form>
+        <div class="table-content">
+            <table class="table">
+                <thead class="table-head">
+                    <tr>
+                        <th>#</th>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                    </tr>
+                </thead>
+                <tbody class="table-body">
+                    @{
+                        int i = 1;
+                    }
+                    @foreach(var item in Bigtoria.utils.SalesProduct.products)
+                    {
+                        <tr>
+                            <td>@(i++)</td>
+                            <td>@item.Name</td>
+                            <td>@item.Quantity</td>
+                            <td>@item.Price</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <br />
+            <h1>TOTAL A PAGAR S/. @Bigtoria.utils.SalesProduct.getAmmount()</h1>
+        </div>
+        @if (TempData["Message"] != null)
+        {
+            <hr />
+            <h3 style="color: red">Error: @TempData["Message"]</h3>
+        }
+    </div>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/component.js"></script>
+    <script src="https://kit.fontawesome.com/c2bff0d639.js" crossorigin="anonymous"></script>
+</body>
+</html>

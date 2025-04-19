@@ -1,0 +1,231 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 11pt;
+}
+
+.bg-login {
+    width: 100%;
+    height: 100vh;
+    background-image: url(../img/Login1.jpeg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: cursive;
+}
+
+    .bg-login h1 {
+        color: #0de50c;
+        margin-bottom: 55px;
+    }
+/**contenedor*/
+.login-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #eddcd900;
+    height: 550px;
+    width: 350px;
+    border: 3px solid #000000;
+    border-radius: 20px;
+    box-shadow: 3px 4px 0px 1px #58dd00;
+}
+
+
+
+
+    .login-form form {
+        width: 90%;
+        height: auto;
+    }
+
+.form-label {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #fff;
+    margin-left: 10px;
+}
+
+.form-input:focus {
+    outline: 2px solid #f6770b;
+    box-shadow: 0px 0px 5px 5px #f6770b;
+}
+/* email-password */
+.input-group {
+    position: relative;
+    width: 300px;
+    font-family: monospace;
+    margin-bottom: 55px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #000;
+    background-color: #fff;
+    border: 5px solid #000;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 5px 5px 0 #000, 10px 10px 0 #4a90e2;
+}
+
+    .form-input:focus {
+        animation: focus-pulse 4s cubic-bezier(0.25, 0.8, 0.25, 1) infinite, glitch 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) infinite;
+    }
+
+    .form-input::placeholder {
+        color: #888;
+        transition: color 0.3s ease;
+    }
+
+    .form-input:focus::placeholder {
+        color: transparent;
+    }
+
+@keyframes focus-pulse {
+    0%, 100% {
+        border-color: #000;
+    }
+
+    50% {
+        border-color: #4a90e2;
+    }
+}
+
+.form-label {
+    position: absolute;
+    left: -3px;
+    top: -35px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #000;
+    padding: 5px 10px;
+    transform: rotate(-1deg);
+    z-index: 1;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.form-input:focus + .form-label {
+    transform: rotate(0deg) scale(1.05);
+    background-color: #4a90e2;
+}
+/* ************************ */
+
+.btn-group {
+    display: flex;
+    gap: 20px;
+}
+
+.btn-login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: 169px;
+    height: 60px;
+    background-color: #000000;
+    color: #fff;
+    text-decoration: none;
+    font-family: cursive;
+    font-size: 15px;
+    font-weight: bold;
+    border: 3px solid #fff;
+    outline: 3px solid #000000;
+    box-shadow: 6px 6px 0 #00a4ef;
+    transition: all 0.1s ease-out;
+    padding: 0 15px;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+}
+
+    .btn-login::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient( 90deg, transparent, rgba(255, 255, 255, 0.8), transparent );
+        z-index: 1;
+        transition: none;
+        opacity: 0;
+    }
+
+@keyframes slide {
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
+
+.btn-login:hover::before {
+    opacity: 1;
+    animation: slide 2s infinite;
+}
+
+.btn-login:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 10px 10px 0 #fc7533;
+    background-color: #000;
+    color: #6eff00;
+}
+
+@keyframes slide {
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
+
+.btn-login:active {
+    transform: translate(4px, 4px);
+    box-shadow: 0px 0px 0 #00a4ef;
+    background-color: #fff;
+    color: #000;
+    border-color: #000;
+}
+
+.button-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+    transition: transform 0.2s ease-out;
+    position: relative;
+    z-index: 1;
+}
+
+.btn-login:hover .button-text {
+    transform: skew(-5deg);
+}
+
+.btn-login:active .button-text {
+    transform: skew(5deg);
+}
+
+.button-text span:first-child {
+    font-size: 11px;
+    text-transform: uppercase;
+}
+
+.button-text span:last-child {
+    font-size: 16px;
+    text-transform: uppercase;
+}

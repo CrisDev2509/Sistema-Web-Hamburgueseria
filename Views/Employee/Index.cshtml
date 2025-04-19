@@ -1,0 +1,86 @@
+﻿@{
+}
+@model IEnumerable<Bigtoria.ViewModels.EmployeeViewModel>;
+
+<div class="content">
+    <div class="message card">
+        <p><b>EMPLEADOS</b></p>
+    </div>
+    <div class="filter card">
+        <div>
+            <a asp-controller="Employee" asp-action="Create" class="btn-filter">Nuevo</a>
+        </div>
+        <div>
+            <a class="btn-filter">Guardar</a>
+        </div>
+    </div>
+    <div class="delivery-content card">
+        <div class="table-content">
+            <table class="table">
+                <thead class="table-head">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">NOMBREAS Y APELLIDOS</th>
+                        <th scope="col">FECHA DE CONTRATO</th>
+                        <th scope="col">CORREO</th>
+                        <th scope="col">CELULAR</th>
+                        <th scope="col">ESTADO</th>
+                        <th scope="col">ACCIONES</th>
+                    </tr>
+                </thead>
+                <tbody class="table-body">
+                    @if(Model !=null && Model.Count() > 0){
+                        foreach(var item in Model)
+                        {
+                            <tr>
+                                <td style="text-align: center">@item.Id</td>
+                                <td>@item.Name</td>
+                                <td style="text-align: center">@item.ContractDate.ToString("dd/MM/yyyy")</td>
+                                <td style="text-align: center">@item.Email</td>
+                                <td style="text-align: center">@item.Phone</td>
+                                <td style="text-align: center"><span class="status @(item.Status ? "complete" : "canceled")">@(item.Status ? "Activo" : "Inactivo")</span></td>
+                                <td style="text-align: center">
+                                    <div class="btn-action">
+                                        <a class="btn-table edit-view" asp-controller="Employee" asp-action="Detail" asp-route-id="@item.Id"><i class="fa-solid fa-eye"></i></a>
+                                        <a class="btn-table edit-view" asp-controller="Employee" asp-action="Edit" asp-route-id="@item.Id"><i class="fa-solid fa-pen"></i></a>
+                                        @if(item.CategoryType.IdCategoryType != 1){
+                                            <a class="btn-table delete" data-path="/Employee/Delete/" data-id="@item.Id"><i class="fa-solid fa-trash"></i></a>
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="7" style="text-align: center">Sin empleados registrados</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="paginaion">
+        </div>
+    </div>
+
+    <!--Modal-->
+    <div id="modal" class="modal-content">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h3>Sistema de ventas</h3>
+                <a id="btn-close-modal" class="btn-close btn-close-modal"><i class="fa-regular fa-circle-xmark"></i></a>
+            </div>
+            <div class="modal-body">
+                <div class="alert-message">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <p>¿Estas seguro que deseas eliminar este producto?</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a id="btn-cancel-modal" class="btn-modal b-red">No</a>
+                <a id="btn-confirm-delete" class="btn-modal f-red">Si</a>
+            </div>
+        </div>
+    </div>
+</div>
