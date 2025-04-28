@@ -31,7 +31,7 @@
                 <tbody class="table-body clicable">
                     @foreach (var item in Model)
                     {
-                        <tr>
+                        <tr onclick="window.location.href='Invoice?id=@item.Id'">
                             <td style="text-align: center">@item.Id</td>
                             <td>@item.Employee</td>
                             <td style="text-align: center">S/. @item.Ammout</td>

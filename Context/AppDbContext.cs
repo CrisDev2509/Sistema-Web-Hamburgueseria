@@ -46,8 +46,8 @@ namespace Bigtoria.Context
 
             modelBuilder.Entity<SaleDetail>()
                 .HasOne(sd => sd.Sale)
-                .WithOne(p => p.SaleDetail)
-                .HasForeignKey<SaleDetail>(sd => sd.SaleId);
+                .WithMany(p => p.SaleDetail)
+                .HasForeignKey(s => s.SaleId);
 
             modelBuilder.Entity<Sale>()
                 .HasOne(s => s.Employee)

@@ -150,18 +150,18 @@ namespace Bigtoria.Controllers
                         var del = await _context.Delivery.AddAsync(d);
                         await _context.SaveChangesAsync();
                         idDel = del.Entity.Id;
+
+                        SalesProduct.products.Clear();
+
+                        TempData["Message"] = $"Venta exitosa, orden N° {idDel}";
+
+                        return RedirectToAction("Invoice", "Report", new {id = sale.Entity.Id, isSale = true });
                     }
                     else
                     {
                         TempData["Message"] = "Agregue productos al carrito";
                         return RedirectToAction("Index", "UserCard");
                     }
-
-                    SalesProduct.products.Clear();
-
-                    TempData["Message"] = $"Venta exitosa, orden N° {idDel}";
-
-                    return RedirectToAction("Index", "UserCard");
                 }
 
                 TempData["Message"] = "Error al completar venta";

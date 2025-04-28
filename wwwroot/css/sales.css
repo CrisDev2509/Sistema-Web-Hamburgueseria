@@ -196,3 +196,52 @@
     align-items: center;
     gap: 10px;
 }
+
+/* Invoice */
+.invoice-content{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 10px;
+}
+
+.header-invoice {
+    border: 2px solid #E0782F;
+    margin-bottom: 15px;
+    display: flex;
+    height: 80px;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.row-invoice{
+    display: flex;
+    width: 50%;
+    gap: 10px;
+    flex-direction: column;
+}
+
+.row-invoice div{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+}
+
+.footer-invoice{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.footer-invoice h2 {
+    height: 45px;
+    width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #E0782F;
+    border-radius: 10px;
+    color: #FFF;
+}

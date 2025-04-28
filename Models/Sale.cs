@@ -13,7 +13,7 @@
         public int State { get; set; }
 
         //Relaciones
-        public SaleDetail SaleDetail { get; set; }
+        public IEnumerable<SaleDetail> SaleDetail { get; set; }
         public Delivery Delivery { get; set; }
 
         public int EmployeeId {  get; set; }

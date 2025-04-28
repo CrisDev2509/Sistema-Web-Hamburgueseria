@@ -1,7 +1,4 @@
-﻿@{
-    Layout = null;
-}
-@model Bigtoria.ViewModels.SalesViewModel;
+﻿@model Bigtoria.ViewModels.SalesViewModel;
 
 <!DOCTYPE html>
 <html lang="en">
@@ -39,7 +36,7 @@
                 </div>
             </div>
             <h4>Tipo de pago</h4>
-            <div class="method-payment">
+            <div class="method-payment" hidden>
                 <div>
                     <input name="Payment" asp-for="Voucher.Payment" type="radio" value="Efectivo" checked />
                     <label for="Payment">Efectivo</label>
@@ -54,6 +51,7 @@
                 </div>
             </div>
             <button class="btn-payment" type="submit">REALIZAR PEDIDO</button>
+            <a class="btn-payment" asp-controller="Sale" asp-action="Index">REGRESAR</a>
         </form>
         <div class="table-content">
             <table class="table">

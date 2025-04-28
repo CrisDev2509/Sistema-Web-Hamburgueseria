@@ -1,0 +1,79 @@
+﻿@model Bigtoria.ViewModels.InvoiceViewModel;
+
+<div class="content">
+    <div class="message card">
+        @if (Model.IsSale)
+        {
+            <p><b>VENTA EXITOSA</b></p>
+        }
+        else
+        {
+            <p><b>REPORTE - FACTURA</b></p>
+        }
+    </div>
+    <div class="filter card">
+        @if (Model.IsSale)
+        {
+            <h2>ORDEN: @Model.Id</h2>
+            <a class="btn-close" asp-controller="Sale" asp-action="Index"><i class="fa-regular fa-circle-xmark"></i></a>
+        }
+        else
+        {
+            <h2>ID: @Model.Id</h2>
+            <a class="btn-close" asp-controller="Report" asp-action="Index"><i class="fa-regular fa-circle-xmark"></i></a>
+        }
+    </div>
+    <div class="invoice-content card">
+        <div class="header-invoice">
+            <div class="row-invoice">
+                <div>
+                    <h5>Cliente: </h5>
+                    <lable>@Model.CustomerName</lable>
+                </div>
+                <div>
+                    <h5>Vendedor: </h5>
+                    <label>@Model.EmpleyeeName</label>
+                </div>
+            </div>
+            <div class="row-invoice">
+                <div>
+                    <h5>Fecha: </h5>
+                    <lable>@Model.Date</lable>
+                </div>
+                <div>
+                    <h5>Estado: </h5>
+                    <label>@Model.Status</label>
+                </div>
+            </div>
+        </div>
+        <div class="table-content">
+            <table class="table">
+                <thead class="table-head">
+                    <tr>
+                        <th scope="row">#</th>
+                        <th scope="row">PRODUCTO</th>
+                        <th scope="row">CANTIDAD</th>
+                        <th scope="row">PRECIO</th>
+                    </tr>
+                </thead>
+                <tbody class="table-body">
+                    @{
+                        int i = 1;
+                    }
+                    @foreach (var item in Model.Products)
+                    {
+                        <tr>
+                            <td>@{i++;}</td>
+                            <td>@item.Product.Name</td>
+                            <td style="text-align: center">@item.Quantity</td>
+                            <td>S/. @item.UnitPrice</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="footer-invoice">
+            <h2>TOTAL: S/. @Model.Total</h2>
+        </div>
+    </div>
+</div>

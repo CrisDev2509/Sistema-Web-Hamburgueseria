@@ -84,13 +84,16 @@
                 <p><b>SUB-TOTAL:</b> S/. @Bigtoria.utils.SalesProduct.getSubTotal()</p>
                 <h2>TOTAL: S/. @Bigtoria.utils.SalesProduct.getAmmount()</h2>
             </div>
-            <div class="payment">
-                <a id="btn-process-sale" class="btn-payment">PAGAR</a>
-            </div>
+            @if (Bigtoria.utils.SalesProduct.products.Count > 0)
+            {
+                <div class="payment">
+                    <a class="btn-payment" asp-controller="UserCard" asp-action="Shop">PAGAR</a>
+                </div>
+            }
         </div>
     </div>
 
-    <!--Modal confirm sale-->
+    <!--Modal confirm sale
     <div id="modal" class="modal-content">
         <div class="modal-form">
             <div class="modal-header">
@@ -163,7 +166,7 @@
                 <button form="sales-form" type="submit" class="btn-modal f-orange">Comprar</button>
             </div>
         </div>
-    </div>
+    </div>-->
 </div>
 
 

@@ -52,5 +52,38 @@ namespace Bigtoria.Controllers
 
             return View(rvm);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Invoice(int? id, bool isSale = false)
+        {
+            if(id is not null && id != 0)
+            {
+                var sales = await _context.Sales.Where(s => s.Id == id)
+                            .Include(s => s.Employee)
+                            .Include(s => s.Client).FirstOrDefaultAsync();
+
+                var salesDet = await _context.SalesDetail.Where(s => s.SaleId == id)
+                            .Include(sd => sd.Product)
+                            .ToListAsync();
+
+                var invoince = new InvoiceViewModel()
+                {
+                    CustomerName = sales.Client.Name + " " + sales.Client.Lastname,
+                    EmpleyeeName = sales.Employee.Name + " " + sales.Employee.Lastname,
+                    Date = sales.Date,
+                    Id = sales.Id,
+                    Status = sales.State == 1 ? "VENDIDO" : "CANCELADO",
+                    Total = sales.Total,
+                    Products = salesDet,
+                    IsSale = isSale
+                };
+
+                ViewData["Select"] = isSale ? "SALES" : "REPORTS";
+
+                return View(invoince);
+            }
+
+            return View();
+        }
     }
 }
