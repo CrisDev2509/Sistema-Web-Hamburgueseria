@@ -195,7 +195,7 @@ namespace Bigtoria.Controllers
                 await _context.Products.AddAsync(product);
                 await _context.SaveChangesAsync();
 
-                ViewData["Message"] = "Producto guardado con exito";
+                TempData["Message"] = "Producto guardado con exito";
 
                 return RedirectToAction("Index", "Inventory");
             }

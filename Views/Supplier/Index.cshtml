@@ -1,0 +1,84 @@
+﻿@{
+}
+@model IEnumerable<Bigtoria.Models.Supplier>;
+
+<div class="content">
+    <div class="message card">
+        <p><b>PROVEEDORES</b></p>
+    </div>
+    <div class="filter card">
+        <div>
+            <form asp-action="Index" method="get" asp-controller="Supplier" class="form-searh">
+                <input type="number" name="ruc" id="ruc" />
+                <button class="btn-fill" type="submit">BUSCAR</button>
+            </form>
+        </div>
+        @if (ViewData["User"]?.ToString() != "GERENTE" || ViewData["User"]?.ToString() != "ADMINISTRADOR")
+        {
+            <div>
+                <a class="btn-filter" asp-controller="Supplier" asp-action="Create">Nuevo</a>
+            </div>
+        }
+    </div>
+    <div class="delivery-content card">
+        @if (TempData["Message"] != null)
+        {
+            <div id="mensaje" style="background: #1ade2f; padding: 10px; border: 1px solid #0F0;">
+                @(TempData["Message"])
+            </div>
+        }
+
+        @if (Model.Count() > 0)
+        {
+            <div class="table-content">
+                <table class="table">
+                    <thead class="table-head">
+                        <tr>
+                            <th scope="row">ID</th>
+                            <th scope="row">NOMBRE</th>
+                            <th scope="row">RUC</th>
+                            <th scope="row">CORREO</th>
+                            <th scope="row">ACCIONES</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-body">
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td style="text-align: center">@item.Id</td>
+                                <td>@item.Name</td>
+                                <td style="text-align: center">@item.RUC</td>
+                                <td style="text-align: center">@item.Email</td>
+                                <td style="text-align: center">
+                                    <div class="btn-action">
+                                        <a class="btn-table edit-view" asp-controller="Supplier" asp-action="Detail" asp-route-id="@item.Id"><i class="fa-solid fa-eye"></i></a>
+                                        <a class="btn-table edit-view" asp-controller="Supplier" asp-action="Edit" asp-route-id="@item.Id"><i class="fa-solid fa-pen"></i></a>
+                                        <a class="btn-table delete" asp-controller="Supplier" asp-action="Delete" asp-route-id="@item.Id"><i class="fa-solid fa-trash"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="info-none">
+                <p>No se encontro ningun proveedor</p>
+            </div>
+        }
+        <div class="paginaion">
+        </div>
+    </div>
+
+</div>
+
+<script>
+    setTimeout(() => {
+      const mensaje = document.getElementById('mensaje');
+      if (mensaje) {
+        mensaje.style.display = 'none';
+      }
+    }, 3000);
+</script>

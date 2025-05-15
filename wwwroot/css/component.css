@@ -512,3 +512,8 @@
     font-size: 18px;
     font-weight: 700;
 }
+
+.form-searh {
+    display: flex;
+    gap: 10px;
+}

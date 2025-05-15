@@ -20,6 +20,13 @@
         }
     </div>
     <div class="delivery-content card">
+        @if (TempData["Message"] != null)
+        {
+            <div id="mensaje" style="background: #1ade2f; padding: 10px; border: 1px solid #0F0;">
+                @(TempData["Message"])
+            </div>
+        }
+
         @if (Model.Count() > 0)
         {
             <div class="table-content">
@@ -160,3 +167,12 @@
     </div>
 
 </div>
+
+<script>
+    setTimeout(() => {
+      const mensaje = document.getElementById('mensaje');
+      if (mensaje) {
+        mensaje.style.display = 'none';
+      }
+    }, 3000);
+</script>

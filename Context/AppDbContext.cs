@@ -15,6 +15,7 @@ namespace Bigtoria.Context
         public DbSet<EmployeeType> EmployeesType { get; set; }
         public DbSet<Sale> Sales { get; set; }
         public DbSet<SaleDetail> SalesDetail { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<Delivery> Delivery { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
@@ -193,6 +194,18 @@ namespace Bigtoria.Context
                 t.Property(c => c.SaleId).IsRequired();
 
                 t.ToTable("Delivery");
+            });
+
+            modelBuilder.Entity<Supplier>(t =>
+            {
+                t.HasKey(c => c.Id);
+
+                t.Property(c => c.Id).IsRequired().ValueGeneratedOnAdd().UseIdentityColumn(1, 1);
+                t.Property(c => c.Name).IsRequired().HasMaxLength(60);
+                t.Property(c => c.RUC).IsRequired().HasMaxLength(11);
+                t.Property(c => c.Email).IsRequired();
+
+                t.ToTable("Suppler");
             });
         }
     }

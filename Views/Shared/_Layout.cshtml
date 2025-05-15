@@ -25,6 +25,7 @@
                 <li><a class="@(ViewData["Select"]?.ToString() == "SALES" ? "select-item" : "")" asp-controller="Sale" asp-action="Index"><i class="fa-solid fa-tag fa-xl"></i><span>VENTAS</span></a></li>
                 <li><a class="@(ViewData["Select"]?.ToString() == "DELIVERY" ? "select-item" : "")" asp-controller="Delivery" asp-action="Index"><i class="fa-solid fa-truck-fast fa-xl"></i><span>PEDIDOS</span></a></li>
                 <li><a class="@(ViewData["Select"]?.ToString() == "INVENTORY" ? "select-item" : "")" asp-controller="Inventory" asp-action="Index"><i class="fa-solid fa-list-check fa-xl"></i><span>INVENTARIO</span></a></li>
+                <li><a class="@(ViewData["Select"]?.ToString() == "SUPPLIER" ? "select-item" : "")" asp-controller="Supplier" asp-action="Index"><i class="fa-solid fa-boxes-packing fa-xl"></i><span>PROVEDORES</span></a></li>
                 <li><a class="@(ViewData["Select"]?.ToString() == "REPORTS" ? "select-item" : "")" asp-controller="Report" asp-action="Index"><i class="fa-solid fa-chart-pie fa-xl"></i><span>REPORTES</span></a></li>
                 @if (User.Claims.Where(c => c.Type == "EmployeeId").Select(c => c.Value).FirstOrDefault()?.ToString() == "1")
                 {

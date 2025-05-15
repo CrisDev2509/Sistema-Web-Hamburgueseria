@@ -1,0 +1,32 @@
+﻿@{
+}
+@model Bigtoria.ViewModels.SupplierViewModel;
+
+<div class="content">
+    <div class="message card">
+        <p><b>PROVEEDOR - DETALLE</b></p>
+    </div>
+    <div class="filter card">
+        <h2>ID: @Model.Id</h2>
+        <a class="btn-close" asp-controller="Supplier" asp-action="Index"><i class="fa-regular fa-circle-xmark"></i></a>
+    </div>
+    <div class="delivery-content card">
+        <div class="row">
+            <div class="col">
+                <div>
+                    <label for="name" class="label-form">Nombre</label>
+                    <input class="input-form" type="text" name="Name" asp-for="Name" readonly />
+                </div>
+                <div>
+                    <label for="RUC" class="label-form">Precio</label>
+                    <input class="input-form" type="number" name="RUC" asp-for="RUC" readonly />
+                </div>
+                <div>
+                    <label for="Email" class="label-form">Correo</label>
+                    <input class="input-form" type="text" name="Email" asp-for="Email" readonly />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
