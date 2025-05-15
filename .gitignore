@@ -398,3 +398,42 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+#   CYPRESS 
+# Node modules
+Cypress-Web-Bigtoria/node_modules/
+
+# Cypress generated folders
+Cypress-Web-Bigtoria/cypress/videos/
+Cypress-Web-Bigtoria/cypress/screenshots/
+
+# Cypress cache
+Cypress-Web-Bigtoria/.cypress/
+
+# Env files
+Cypress-Web-Bigtoria/.env
+Cypress-Web-Bigtoria/.env.local
+Cypress-Web-Bigtoria/.env.*.local
+
+# Output logs
+Cypress-Web-Bigtoria/npm-debug.log*
+Cypress-Web-Bigtoria/yarn-debug.log*
+Cypress-Web-Bigtoria/yarn-error.log*
+
+# OS-specific
+Cypress-Web-Bigtoria/.DS_Store
+Cypress-Web-Bigtoria/Thumbs.db
+
+# IDE/editor settings
+Cypress-Web-Bigtoria/.vscode/
+Cypress-Web-Bigtoria/.idea/
+
+# Build artifacts
+Cypress-Web-Bigtoria/dist/
+Cypress-Web-Bigtoria/build/
+
+# Coverage reports
+Cypress-Web-Bigtoria/coverage/
+
+# Git
+Cypress-Web-Bigtoria/.git/
