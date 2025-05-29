@@ -46,7 +46,7 @@ namespace Bigtoria.Controllers
         public async Task<IActionResult> addCard(int id)
         {
             var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
-            if (product == null) return NotFound();
+            if (product == null) return NotFound(new {Message = $"No encontrado por id: {id}"});
 
             if (SalesProduct.products.Where(p => p.Id == product.Id).FirstOrDefault() != null)
             {
@@ -86,7 +86,7 @@ namespace Bigtoria.Controllers
             product.Stock--;
             await _context.SaveChangesAsync();
 
-            return Ok();
+            return Ok(new {Products = SalesProduct.products});
         }
 
         [HttpPost]
