@@ -1,46 +1,4 @@
 ﻿document.addEventListener("DOMContentLoaded", function () {
-    //Product card
-    const productCard = document.querySelectorAll('.product-card');
-    if (productCard.length > 0) {
-        for (let i = 0; i < productCard.length; i++) {
-            const p = productCard[i];
-            const info = p.querySelector('.product-info');
-            if (info !== null) {
-                p.addEventListener('mouseenter', () => {
-                    info.style.display = 'flex';
-                });
-
-                p.addEventListener('mouseleave', () => {
-                    info.style.display = 'none';
-                });
-            }
-
-
-            p.addEventListener('click', () => {
-                let productId = p.getAttribute('data-id-product');
-                if (productId) {
-                    fetch(`/UserCard/addCard/${productId}`, {
-                        method: 'POST',
-                        headers: {
-                            'content-tipe': 'application/json'
-                        }
-                    })
-                    .then(response => {
-                        if (response.ok) {
-                            location.reload();
-                        }
-                        else {
-
-                        }
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    });
-                }
-            });
-        }
-    }
-
     //Shopping
     const deleteAll = document.getElementById('delete-all-shop');
     const deleteById = document.querySelectorAll('.delete-item-shop');

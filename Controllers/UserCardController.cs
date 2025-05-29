@@ -172,7 +172,7 @@ namespace Bigtoria.Controllers
             {
                 TempData["Message"] = e.Message;
 
-                return BadRequest(new { Message = e.Message});
+                return RedirectToAction("Shop", "UserCard");
             }
         }
 

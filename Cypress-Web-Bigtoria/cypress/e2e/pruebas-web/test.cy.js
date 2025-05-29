@@ -14,8 +14,7 @@ describe('Pruebas de sistema web Bigtoria', () => {
 
     it('verificar que se puede hacer una compra', () => {
         cy.get('.menu-item > :nth-child(2) > a').click()
-        cy.get('.product-content').children('div').eq(1).trigger('mouseenter');
-        cy.get('[data-id-product="2"] > #product-info').click()
+        cy.get('[data-cy="btn-add-card"]').first().click()
         cy.get('.btn-payment').click()
         cy.get('button.btn-payment').should('have.text', 'REALIZAR PEDIDO')
         cy.get(':nth-child(1) > :nth-child(1) > .input-form').type('Prueba')
@@ -25,11 +24,9 @@ describe('Pruebas de sistema web Bigtoria', () => {
         cy.get('button.btn-payment').click()
         cy.get('b').should('have.text', 'VENTA EXITOSA')
     })
-
     it('verificar mensaje de error cuando no se ingresan datos en la venta', () => {
         cy.get('.menu-item > :nth-child(2) > a').click()
-        cy.get('.product-content').children('div').eq(1).trigger('mouseenter');
-        cy.get('[data-id-product="2"] > #product-info').click()
+        cy.get('[data-cy="btn-add-card"]').first().click()
         cy.get('.btn-payment').click()
         cy.get('button.btn-payment').should('have.text', 'REALIZAR PEDIDO')
         cy.get('button.btn-payment').click()
@@ -56,7 +53,15 @@ describe('Pruebas de sistema web Bigtoria', () => {
         cy.get('#Product_Stock').clear().type(10.00)
         cy.get('#Product_Discount').clear().type(0)
         cy.get('.btn-fill').click()
-        cy.get('#mensaje').should('have.text', 'Producto guardado con exito')
+        cy.get('#mensaje')
+        .should('be.visible')
+        .invoke('text')
+        .then((text) => {
+            const cleanText = text.replace(/\s+/g, ' ').trim();
+            expect(cleanText).to.contain('Producto guardado con exito');
+        });
+
+        cy.get('#mensaje', { timeout: 3000 }).should('not.be.visible');
     })
 
     it('Verificar que campos se validen antes de registrar un producto', () => {
@@ -76,7 +81,15 @@ describe('Pruebas de sistema web Bigtoria', () => {
         cy.get('#RUC').type(10203040501)
         cy.get('#Email').type('proveedor3@prueba.com')
         cy.get('.btn-fill').click()
-        cy.get('#mensaje').should('have.text', 'Proveedor registrado')
+        cy.get('#mensaje')
+        .should('be.visible')
+        .invoke('text')
+        .then((text) => {
+            const cleanText = text.replace(/\s+/g, ' ').trim();
+            expect(cleanText).to.contain('Proveedor registrado');
+        });
+
+        cy.get('#mensaje', { timeout: 3000 }).should('not.be.visible');
     })
 
     it('Verificar que se validan los campos al registrar un proveedor', () => {
@@ -102,7 +115,15 @@ describe('Pruebas de sistema web Bigtoria', () => {
         cy.get('b').should('have.text', 'PROVEEDOR - EDITAR')
         cy.get('#Name').type('actualizado')
         cy.get('.btn-fill').click()
-        cy.get('#mensaje').should('have.text', 'Proveedor actualizado')
+        cy.get('#mensaje')
+        .should('be.visible')
+        .invoke('text')
+        .then((text) => {
+            const cleanText = text.replace(/\s+/g, ' ').trim();
+            expect(cleanText).to.contain('Proveedor actualizado');
+        });
+
+        cy.get('#mensaje', { timeout: 3000 }).should('not.be.visible');
     })
 
     it('Verificar que se puede eliminar un proveedor', () => {
@@ -111,7 +132,15 @@ describe('Pruebas de sistema web Bigtoria', () => {
         cy.get('tbody').find('tr').last().find('.btn-action').children('a').eq(2).click()
         cy.get('b').should('have.text', 'PROVEEDOR - ELIMINAR')
         cy.get('.btn-fill').click()
-        cy.get('#mensaje').should('have.text', 'Proveedor eliminado')
+        cy.get('#mensaje')
+        .should('be.visible')
+        .invoke('text')
+        .then((text) => {
+            const cleanText = text.replace(/\s+/g, ' ').trim();
+            expect(cleanText).to.contain('Proveedor eliminado');
+        });
+
+        cy.get('#mensaje', { timeout: 3000 }).should('not.be.visible');
     })
 
     it('Verificar que se puede buscar un proveedor por RUC', () => {

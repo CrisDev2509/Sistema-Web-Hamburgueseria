@@ -186,24 +186,28 @@
       "id": "2e35d0f5-96de-436f-abd5-6dc91d4cdf9f",
       "comment": "",
       "command": "assertElementPresent",
-      "target": "id=product-info",
+      "target": "linkText=Añadir a carrito",
       "targets": [
-        ["id=product-info", "id"],
-        ["css=.product-card:nth-child(1) > #product-info", "css:finder"],
-        ["xpath=//div[@id='product-info']", "xpath:attributes"],
-        ["xpath=//div[2]/div/div[2]/div/div[2]", "xpath:position"]
+        ["linkText=Añadir a carrito", "linkText"],
+        ["css=.product-card:nth-child(1) .btn-card-fill", "css:finder"],
+        ["xpath=//a[contains(text(),'Añadir a carrito')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/Sale/addCard/1')]", "xpath:href"],
+        ["xpath=//div[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Añadir a carrito')]", "xpath:innerText"]
       ],
       "value": ""
     }, {
       "id": "c73f567c-3752-41db-be54-39323d736c41",
       "comment": "",
       "command": "click",
-      "target": "id=product-info",
+      "target": "linkText=Añadir a carrito",
       "targets": [
-        ["id=product-info", "id"],
-        ["css=.product-card:nth-child(1) > #product-info", "css:finder"],
-        ["xpath=//div[@id='product-info']", "xpath:attributes"],
-        ["xpath=//div[2]/div/div[2]/div/div[2]", "xpath:position"]
+        ["linkText=Añadir a carrito", "linkText"],
+        ["css=.product-card:nth-child(1) .btn-card-fill", "css:finder"],
+        ["xpath=//a[contains(text(),'Añadir a carrito')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/Sale/addCard/1')]", "xpath:href"],
+        ["xpath=//div[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Añadir a carrito')]", "xpath:innerText"]
       ],
       "value": ""
     }, {
@@ -391,43 +395,41 @@
       "id": "631662a5-f2d9-4b91-8ddf-15ee38e30592",
       "comment": "",
       "command": "verifyElementPresent",
-      "target": "css=.out-stock > img",
-      "targets": [],
-      "value": ""
-    }, {
-      "id": "ad2a190a-66ff-4c84-97da-9ad7485fa479",
-      "comment": "",
-      "command": "mouseOver",
-      "target": "css=.product-card-info",
+      "target": "linkText=Añadir a carrito",
       "targets": [
-        ["id=product-info", "id"],
-        ["css=.product-card:nth-child(1) > #product-info", "css:finder"],
-        ["xpath=//div[@id='product-info']", "xpath:attributes"],
-        ["xpath=//div[2]/div/div[2]/div/div[2]", "xpath:position"]
+        ["linkText=Añadir a carrito", "linkText"],
+        ["css=.product-card:nth-child(1) .btn-card-fill", "css:finder"],
+        ["xpath=//a[contains(text(),'Añadir a carrito')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/Sale/addCard/1')]", "xpath:href"],
+        ["xpath=//div[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Añadir a carrito')]", "xpath:innerText"]
       ],
       "value": ""
     }, {
       "id": "6a0f3247-f413-443e-b901-a32e89bf7e91",
       "comment": "",
-      "command": "waitForElementPresent",
-      "target": "id=product-info",
+      "command": "waitForElementNotPresent",
+      "target": "linkText=SIN ESTOCK",
       "targets": [
-        ["id=product-info", "id"],
-        ["css=.product-card:nth-child(1) > #product-info", "css:finder"],
-        ["xpath=//div[@id='product-info']", "xpath:attributes"],
-        ["xpath=//div[2]/div/div[2]/div/div[2]", "xpath:position"]
+        ["linkText=SIN ESTOCK", "linkText"],
+        ["css=.product-card:nth-child(1) .btn-card-fill", "css:finder"],
+        ["xpath=//a[contains(text(),'SIN ESTOCK')]", "xpath:link"],
+        ["xpath=//div[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'SIN ESTOCK')]", "xpath:innerText"]
       ],
       "value": "30000"
     }, {
       "id": "f65a00e4-beb5-4099-ae95-20be16e8acf5",
       "comment": "",
       "command": "click",
-      "target": "id=product-info",
+      "target": "linkText=Añadir a carrito",
       "targets": [
-        ["id=product-info", "id"],
-        ["css=.product-card:nth-child(1) > #product-info", "css:finder"],
-        ["xpath=//div[@id='product-info']", "xpath:attributes"],
-        ["xpath=//div[2]/div/div[2]/div/div[2]", "xpath:position"]
+        ["linkText=Añadir a carrito", "linkText"],
+        ["css=.product-card:nth-child(1) .btn-card-fill", "css:finder"],
+        ["xpath=//a[contains(text(),'Añadir a carrito')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/Sale/addCard/1')]", "xpath:href"],
+        ["xpath=//div[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Añadir a carrito')]", "xpath:innerText"]
       ],
       "value": ""
     }, {

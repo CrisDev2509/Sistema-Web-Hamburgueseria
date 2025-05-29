@@ -42,7 +42,7 @@ namespace Bigtoria.Controllers
         }
 
         //Post methods
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> addCard(int id)
         {
             var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
@@ -86,7 +86,7 @@ namespace Bigtoria.Controllers
             product.Stock--;
             await _context.SaveChangesAsync();
 
-            return Ok(new {Products = SalesProduct.products});
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
