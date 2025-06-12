@@ -10,7 +10,7 @@
     </TestPlan>
     <hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Pruebas jmeter">
-        <intProp name="ThreadGroup.num_threads">1</intProp>
+        <intProp name="ThreadGroup.num_threads">10</intProp>
         <intProp name="ThreadGroup.ramp_time">1</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
@@ -28,12 +28,30 @@
             </elementProp>
             <elementProp name="" elementType="Header">
               <stringProp name="Header.name">cookie</stringProp>
-              <stringProp name="Header.value">.AspNetCore.Antiforgery.RoiQpDN09kQ=CfDJ8I96uG1f--1BoPXXfUOVC1vVV4rJlugR_F5uQN1Yf_9r67IXzFrrWRomNVvd5-u5DClVHrlKuQg97jFvNRKMDv8Fpk1iXn-Y_okDO2Nb2xbw22996ew1RMg05ZJAr0ZoANrVvubJBFJOz9Z6PAi0XZ0; .AspNetCore.Antiforgery.y6wOPuXRmfA=CfDJ8I96uG1f--1BoPXXfUOVC1topf0PCNH208XzKTARk8FO4fPZqDXf4BxtHSpCxAvE4bzyoPxAjqSQxrHSGvq7twTBqgv9OKrg-9yDEJlYfQIaTh8nPwN2cYNx9Q8q53_xXUBKfQWBFkiGq-eGxBWOSFE; .AspNetCore.Identity.Application=CfDJ8I96uG1f--1BoPXXfUOVC1t0MDhkmq2mWlmwcT378UoH87Zf6fKFCpgstL54H4br7PwSCjEBF8UzkcAdLwtbnkIisqx2rvxgxSNzUYy5hH4wlm1U6u9aRxM1JJJpoEXp_a4uPyzmqmi3e1Xt1JWLa3O1I5-s2U0pU8NOqRK0LYe6cjucf6qI-nysrEW36wrKmXcPblAC1RpqqUNjJpVJ42aayia7awqmH-WOPAHQ2Q-HVf5xqIK5NNnHA9XurLRVi-yhHQPOdHX_ZnsgmREZp44YsvGc1akaLWdCT314pjAsXlLzEccTtmAwASsyr33iyNEMx8frdTFE4apYp9rMiz7gCkXrXZthvf06v1Id-5fdIxjOm0VSet185gP-5hvzcy08PNngIxjXyQVc-bNhio8_ViYbbx2uCMkPnpgPzHmNvUuXw7sH9tIX89yVOjEk3fp5UczuWsJDKNKl_1tjXrp0KOCTwT05ir22iH2_8t7qxEBVPOASEcG1MIWUpWTa8ACAVTLdNIkSDHHfRMZiBTYgdbZqikGZXuNx-chLbkQ0r4USiGZpfAqab447AdC-E8uRb7Brw2BX0g2a9-MlEm-c7ZYuCo--F6qhGhNI3L8zKdTx8lvjkalOw3KA0nzzwFYeL4VAnCCtkkWYMRYRVAh1omnXsViYIkqUTfJiFqNx393TMHmW0zn7ekhgRbi_2gX7PVPSlnG5kRNIww0C26xThDU1GGOtYBuQYGItBxTcQVgHN9d0WLJXcEuLqzFtSbBNYOywW7uOzAXcOTy4amctyc5TOr_boqT1H1mX8J2t744umiKnyFks-rpzqpGlk7kWxe9e9U5sIZzr1KDaLG0; .AspNetCore.Cookies=CfDJ8I96uG1f--1BoPXXfUOVC1vYaRlNCQV3woME6FO7sebUINtEfhFlXn0ax-wwuXkJmmqH5JxJYBv-CnE0xuM1WzWekR1iwK_a64a3K93i9rQUYqsHqFwVUwUXF_vCE1UFgFyJ44yUEhYPzuXzEWznoNA46vJf6g8XEN9mmwxPCRTGr078uQhQW551OIhfh4w0ig02AonymOfpjEGKc2UK9Lnv-zo94IEg8bugtsxq3NegytdKn-Tphra9PqTLhjow_R7udcfjwf6G4MThVILsZXR_eacMKCyy1YOBhl89DczLm326dV6GEwjqNIYkgJODNClquySU0Kv7LgBHVHmrJI0YBr9O7F3KExRK-YbwFJQifs-vsGA6vyt8STLr7RKjfGBhZ8lquPalP6P9GKyg6p2sHXS3_s9tsYtnao6NBmpY8vGljFI54tNDuQ0QnMeSow</stringProp>
+              <stringProp name="Header.value">.AspNetCore.Antiforgery.RoiQpDN09kQ=CfDJ8I96uG1f--1BoPXXfUOVC1vVV4rJlugR_F5uQN1Yf_9r67IXzFrrWRomNVvd5-u5DClVHrlKuQg97jFvNRKMDv8Fpk1iXn-Y_okDO2Nb2xbw22996ew1RMg05ZJAr0ZoANrVvubJBFJOz9Z6PAi0XZ0; .AspNetCore.Antiforgery.y6wOPuXRmfA=CfDJ8I96uG1f--1BoPXXfUOVC1topf0PCNH208XzKTARk8FO4fPZqDXf4BxtHSpCxAvE4bzyoPxAjqSQxrHSGvq7twTBqgv9OKrg-9yDEJlYfQIaTh8nPwN2cYNx9Q8q53_xXUBKfQWBFkiGq-eGxBWOSFE; .AspNetCore.Identity.Application=CfDJ8I96uG1f--1BoPXXfUOVC1t0MDhkmq2mWlmwcT378UoH87Zf6fKFCpgstL54H4br7PwSCjEBF8UzkcAdLwtbnkIisqx2rvxgxSNzUYy5hH4wlm1U6u9aRxM1JJJpoEXp_a4uPyzmqmi3e1Xt1JWLa3O1I5-s2U0pU8NOqRK0LYe6cjucf6qI-nysrEW36wrKmXcPblAC1RpqqUNjJpVJ42aayia7awqmH-WOPAHQ2Q-HVf5xqIK5NNnHA9XurLRVi-yhHQPOdHX_ZnsgmREZp44YsvGc1akaLWdCT314pjAsXlLzEccTtmAwASsyr33iyNEMx8frdTFE4apYp9rMiz7gCkXrXZthvf06v1Id-5fdIxjOm0VSet185gP-5hvzcy08PNngIxjXyQVc-bNhio8_ViYbbx2uCMkPnpgPzHmNvUuXw7sH9tIX89yVOjEk3fp5UczuWsJDKNKl_1tjXrp0KOCTwT05ir22iH2_8t7qxEBVPOASEcG1MIWUpWTa8ACAVTLdNIkSDHHfRMZiBTYgdbZqikGZXuNx-chLbkQ0r4USiGZpfAqab447AdC-E8uRb7Brw2BX0g2a9-MlEm-c7ZYuCo--F6qhGhNI3L8zKdTx8lvjkalOw3KA0nzzwFYeL4VAnCCtkkWYMRYRVAh1omnXsViYIkqUTfJiFqNx393TMHmW0zn7ekhgRbi_2gX7PVPSlnG5kRNIww0C26xThDU1GGOtYBuQYGItBxTcQVgHN9d0WLJXcEuLqzFtSbBNYOywW7uOzAXcOTy4amctyc5TOr_boqT1H1mX8J2t744umiKnyFks-rpzqpGlk7kWxe9e9U5sIZzr1KDaLG0; .AspNetCore.Cookies=CfDJ8I96uG1f--1BoPXXfUOVC1ucIRFExbdX8CsT6rcHSsaUrxBs_UHWM611q23L5In1OVNTUmP7NIOiUdRM56RKWVn-NWmIv2m-oPAOCMBvFq2FeQVVNgpJY_MpHXW-W_FoMRX0OFcoJTHmRRSgAfKSZ_b9LKpfQiBEAlQEFiXKo7Jub9nc8ctwewvjGBTyEvLlOEEBEmvHvisFLhf94W2OC_I5Qwfj9iD32C2S3G01Ozi1tCqW4DWsj6pupeibNqAArWZ6q0zKLtlqBYaK0-yuVCCKULYvSYo4On75mb_2hYwWV1YQ_qx9bCum0GGZ0N6RJOHY6imAOng7kiidIeFnGkCQlfmDMorORVt9TmOBWquWNoOH-h0vd-j5JTMh7pfm7SqhqtQiCF9XmHsEX-MmbrSqHPUiArZarxONSIV-SjtdvrikXILfbBGCameMuJMTqA</stringProp>
             </elementProp>
           </collectionProp>
         </HeaderManager>
         <hashTree/>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Mostrar productos">
+        <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="Contador">
+          <stringProp name="CounterConfig.start">1</stringProp>
+          <stringProp name="CounterConfig.end">10</stringProp>
+          <stringProp name="CounterConfig.incr">1</stringProp>
+          <stringProp name="CounterConfig.name">Count</stringProp>
+          <stringProp name="CounterConfig.format"></stringProp>
+          <boolProp name="CounterConfig.per_user">false</boolProp>
+        </CounterConfig>
+        <hashTree/>
+        <RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="Variable aleatoria">
+          <stringProp name="maximumValue">1099999999</stringProp>
+          <stringProp name="minimumValue">1011111111</stringProp>
+          <stringProp name="outputFormat"></stringProp>
+          <boolProp name="perThread">false</boolProp>
+          <stringProp name="randomSeed"></stringProp>
+          <stringProp name="variableName">ruc</stringProp>
+        </RandomVariableConfig>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Mostrar productos" enabled="false">
           <stringProp name="HTTPSampler.domain">localhost</stringProp>
           <stringProp name="HTTPSampler.port">5139</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -43,50 +61,6 @@
           <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="Variables definidas por el Usuario">
             <collectionProp name="Arguments.arguments"/>
-          </elementProp>
-        </HTTPSamplerProxy>
-        <hashTree>
-          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Aserción de Respuesta" enabled="true">
-            <collectionProp name="Asserion.test_strings">
-              <stringProp name="49586">200</stringProp>
-            </collectionProp>
-            <stringProp name="Assertion.custom_message"></stringProp>
-            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
-            <boolProp name="Assertion.assume_success">false</boolProp>
-            <intProp name="Assertion.test_type">16</intProp>
-          </ResponseAssertion>
-          <hashTree/>
-        </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Agregar producto a carrito">
-          <stringProp name="HTTPSampler.domain">localhost</stringProp>
-          <stringProp name="HTTPSampler.port">5139</stringProp>
-          <stringProp name="HTTPSampler.protocol">http</stringProp>
-          <stringProp name="HTTPSampler.path">Sale/addCard?id=3</stringProp>
-          <stringProp name="HTTPSampler.method">POST</stringProp>
-          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="Variables definidas por el Usuario">
-            <collectionProp name="Arguments.arguments"/>
-          </elementProp>
-        </HTTPSamplerProxy>
-        <hashTree/>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Realizar venta">
-          <stringProp name="HTTPSampler.domain">localhost</stringProp>
-          <stringProp name="HTTPSampler.port">5139</stringProp>
-          <stringProp name="HTTPSampler.protocol">http</stringProp>
-          <stringProp name="HTTPSampler.path">UserCard/Shop</stringProp>
-          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-          <stringProp name="HTTPSampler.method">POST</stringProp>
-          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
-            <collectionProp name="Arguments.arguments">
-              <elementProp name="" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">Name=PRUEBA+JMETER&amp;Email=test%40jmeter.com&amp;Lastname=1JMETER&amp;Phone=1234567890&amp;Payment=Efectivo</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-              </elementProp>
-            </collectionProp>
           </elementProp>
         </HTTPSamplerProxy>
         <hashTree>
@@ -101,7 +75,57 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Guardar producto">
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Venta" enabled="false">
+          <boolProp name="TransactionController.parent">true</boolProp>
+          <boolProp name="TransactionController.includeTimers">false</boolProp>
+        </TransactionController>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Agregar producto a carrito">
+            <stringProp name="HTTPSampler.domain">localhost</stringProp>
+            <stringProp name="HTTPSampler.port">5139</stringProp>
+            <stringProp name="HTTPSampler.protocol">http</stringProp>
+            <stringProp name="HTTPSampler.path">Sale/addCard?id=3</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="Variables definidas por el Usuario">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+          </HTTPSamplerProxy>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Realizar venta">
+            <stringProp name="HTTPSampler.domain">localhost</stringProp>
+            <stringProp name="HTTPSampler.port">5139</stringProp>
+            <stringProp name="HTTPSampler.protocol">http</stringProp>
+            <stringProp name="HTTPSampler.path">UserCard/Shop</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">Name=PRUEBA+JMETER&amp;Email=test%40jmeter.com&amp;Lastname=1JMETER&amp;Phone=1234567890&amp;Payment=Efectivo</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Aserción de Respuesta">
+              <collectionProp name="Asserion.test_strings">
+                <stringProp name="49586">200</stringProp>
+              </collectionProp>
+              <stringProp name="Assertion.custom_message"></stringProp>
+              <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+              <boolProp name="Assertion.assume_success">false</boolProp>
+              <intProp name="Assertion.test_type">16</intProp>
+            </ResponseAssertion>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Guardar producto" enabled="false">
           <stringProp name="HTTPSampler.domain">localhost</stringProp>
           <stringProp name="HTTPSampler.port">5139</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -134,7 +158,7 @@
             <collectionProp name="Arguments.arguments">
               <elementProp name="" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">Name=PROVEEDOR+JMETER&amp;RUC=1043170349&amp;Email=proveedor%40jmeter.com</stringProp>
+                <stringProp name="Argument.value">Name=PROVEEDOR JMETER ${Count}&amp;RUC=${ruc}&amp;Email=proveedor%40jmeter.com</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>
@@ -145,7 +169,7 @@
           <stringProp name="HTTPSampler.domain">localhost</stringProp>
           <stringProp name="HTTPSampler.port">5139</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
-          <stringProp name="HTTPSampler.path">Supplier/Edit/13</stringProp>
+          <stringProp name="HTTPSampler.path">Supplier/Edit/1</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <stringProp name="HTTPSampler.method">POST</stringProp>
           <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
@@ -165,7 +189,7 @@
           <stringProp name="HTTPSampler.domain">localhost</stringProp>
           <stringProp name="HTTPSampler.port">5139</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
-          <stringProp name="HTTPSampler.path">Supplier/Delete/13</stringProp>
+          <stringProp name="HTTPSampler.path">Supplier/Delete/1</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <stringProp name="HTTPSampler.method">POST</stringProp>
           <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
@@ -218,7 +242,7 @@
           <stringProp name="filename"></stringProp>
         </ResultCollector>
         <hashTree/>
-        <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Reporte resumen" enabled="true">
+        <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Reporte resumen">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
             <name>saveConfig</name>
