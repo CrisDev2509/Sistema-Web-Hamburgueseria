@@ -31,6 +31,7 @@ namespace Bigtoria.Controllers
         [HttpGet]
         public IActionResult Shop()
         {
+            States.MenuSelect = Menu.SALE;
             return View();
         }
 

@@ -1,4 +1,5 @@
 ﻿using Bigtoria.Context;
+using Bigtoria.utils;
 using Bigtoria.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -19,7 +20,7 @@ namespace Bigtoria.Controllers
         [HttpGet]
         public async Task<IActionResult> Index(string? ruc = null)
         {
-            ViewData["Select"] = "SUPPLIER";
+            States.MenuSelect = Menu.SUPPLIER;
 
             if(ruc == null)
             {
@@ -38,13 +39,14 @@ namespace Bigtoria.Controllers
         public IActionResult Create()
         {
             TempData["Message"] = null;
-            ViewData["Select"] = "SUPPLIER";
+            States.MenuSelect = Menu.SUPPLIER;
             return View();
         }
 
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
+            States.MenuSelect = Menu.SUPPLIER;
             TempData["Message"] = null;
             var supp = await _context.Suppliers.Where(s => s.Id == id).Select(s => new SupplierViewModel
             {
@@ -65,6 +67,7 @@ namespace Bigtoria.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
+            States.MenuSelect = Menu.SUPPLIER;
             TempData["Message"] = null;
             var supp = await _context.Suppliers.Where(s => s.Id == id).Select(s => new SupplierViewModel
             {
@@ -85,6 +88,7 @@ namespace Bigtoria.Controllers
         [HttpGet]
         public async Task<IActionResult> Detail(int id)
         {
+            States.MenuSelect = Menu.SUPPLIER;
             TempData["Message"] = null;
             var supp = await _context.Suppliers.Where(s => s.Id == id).Select(s => new SupplierViewModel
             {

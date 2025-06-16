@@ -1,5 +1,6 @@
 using Bigtoria.Context;
 using Bigtoria.Models;
+using Bigtoria.utils;
 using Bigtoria.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -20,7 +21,7 @@ namespace Bigtoria.Controllers
 
         public async Task<IActionResult> Index()
         {
-            ViewData["Select"] = "HOME";
+            States.MenuSelect = Menu.HOME;
             string? id = User.Claims.FirstOrDefault(c => c.Type == "EmployeeId")?.Value;
 
             if (id == null)

@@ -1,4 +1,5 @@
 ﻿using Bigtoria.Context;
+using Bigtoria.utils;
 using Bigtoria.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -18,7 +19,7 @@ namespace Bigtoria.Controllers
 
         public async Task<IActionResult> Index()
         {
-            ViewData["Select"] = "REPORTS";
+            States.MenuSelect = Menu.REPORT;
 
             var rvm = await _context.Sales.Select(s => new ReportViewModel
             {
@@ -36,7 +37,7 @@ namespace Bigtoria.Controllers
 
         public async Task<IActionResult> EmployeeReport()
         {
-            ViewData["Select"] = "REPORTS";
+            States.MenuSelect = Menu.REPORT;
 
             var rvm = new ReportViewModel()
             {
@@ -78,7 +79,7 @@ namespace Bigtoria.Controllers
                     IsSale = isSale
                 };
 
-                ViewData["Select"] = isSale ? "SALES" : "REPORTS";
+                States.MenuSelect = isSale ? Menu.SALE : Menu.REPORT;
 
                 return View(invoince);
             }

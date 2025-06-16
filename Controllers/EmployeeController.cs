@@ -1,5 +1,6 @@
 ﻿using Bigtoria.Context;
 using Bigtoria.Models;
+using Bigtoria.utils;
 using Bigtoria.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -20,7 +21,7 @@ namespace Bigtoria.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            ViewData["Select"] = "EMPLOYEE";
+            States.MenuSelect = Menu.USERS;
             var list = await _context.Employees.Select(e => new EmployeeViewModel
             {
                 Id = e.Id,
@@ -44,7 +45,7 @@ namespace Bigtoria.Controllers
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            ViewData["Select"] = "EMPLOYEE";
+            States.MenuSelect = Menu.USERS;
             var model = new CreateEmployeeViewModel
             {
                 Categories = await _context.EmployeesType.Where(et => et.Id != 1).Select(et => new CategoryTypeViewModel
@@ -61,7 +62,7 @@ namespace Bigtoria.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            ViewData["Select"] = "EMPLOYEE";
+            States.MenuSelect = Menu.USERS;
             var model = await _context.Employees.Where(e => e.Id == id)
                                 .Select(e => new CreateEmployeeViewModel
                                 {

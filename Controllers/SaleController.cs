@@ -21,7 +21,7 @@ namespace Bigtoria.Controllers
         [HttpGet]
         public async Task<IActionResult> Index(int id = 0)
         {
-            ViewData["Select"] = "SALES";
+            States.MenuSelect = Menu.SALE;
 
             if(id == 0)
             {

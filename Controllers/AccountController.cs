@@ -23,7 +23,7 @@ namespace Bigtoria.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            ViewData["Select"] = "ACCOUNT";
+            States.MenuSelect = Menu.ACCOUNT;
             string? id = User.Claims.FirstOrDefault(c => c.Type == "EmployeeId")?.Value;
 
             if (id == null) return NotFound();
@@ -51,7 +51,7 @@ namespace Bigtoria.Controllers
         [HttpGet]
         public async Task<IActionResult> Accounts()
         {
-            ViewData["Select"] = "ACCOUNT";
+            States.MenuSelect = Menu.ACCOUNT;
             States.IsChangePassword = false;
             var accounts = await _context.LoginEmpleyoee
                                 .Select(le => new AccountViewModel
@@ -76,7 +76,7 @@ namespace Bigtoria.Controllers
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            ViewData["Select"] = "ACCOUNT";
+            States.MenuSelect = Menu.ACCOUNT;
 
             var employees = new CreateAccountViewModel()
             {
@@ -98,7 +98,7 @@ namespace Bigtoria.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            ViewData["Select"] = "ACCOUNT";
+            States.MenuSelect = Menu.ACCOUNT;
             var employees = await _context.LoginEmpleyoee.Where(le => le.EmployeeId == id)
                                                     .Select(e => new CreateAccountViewModel
                                                     {
@@ -121,7 +121,7 @@ namespace Bigtoria.Controllers
         [HttpGet]
         public async Task<IActionResult> Detail(int id)
         {
-            ViewData["Select"] = "ACCOUNT";
+            States.MenuSelect = Menu.ACCOUNT;
             var employees = await _context.LoginEmpleyoee.Where(le => le.EmployeeId == id)
                                                     .Select(e => new AccountViewModel
                                                     {
@@ -140,7 +140,7 @@ namespace Bigtoria.Controllers
         [HttpGet]
         public IActionResult AccessDenied(string ReturnUrl)
         {
-            ViewData["Select"] = "ACCOUNT";
+            States.MenuSelect = Menu.ACCOUNT;
             return View("AccessDenied", ReturnUrl);
         }
 

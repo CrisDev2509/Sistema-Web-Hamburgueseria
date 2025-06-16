@@ -1,5 +1,6 @@
 ﻿using Bigtoria.Context;
 using Bigtoria.Models;
+using Bigtoria.utils;
 using Bigtoria.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -24,7 +25,7 @@ namespace Bigtoria.Controllers
 
         public async Task<IActionResult> Index(bool all = true)
         {
-            ViewData["Select"] = "INVENTORY";
+            States.MenuSelect = Menu.INVENTORY;
 
             if (all)
             {
@@ -63,7 +64,7 @@ namespace Bigtoria.Controllers
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            ViewData["Select"] = "INVENTORY";
+            States.MenuSelect = Menu.INVENTORY;
             string? id = User.Claims.FirstOrDefault(c => c.Type == "EmployeeId")?.Value;
             ViewData["User"] = await _context.Employees.Where(e => e.Id == int.Parse(id)).Select(e => e.EmployeeType.Name).FirstOrDefaultAsync();
 
@@ -82,7 +83,7 @@ namespace Bigtoria.Controllers
         [HttpGet]
         public async Task<IActionResult> Detail(int id)
         {
-            ViewData["Select"] = "INVENTORY";
+            States.MenuSelect = Menu.INVENTORY;
 
             var product = await _context.Products.Where(p => p.Id == id)
                                     .Select(p => new ProductViewModel
@@ -107,7 +108,7 @@ namespace Bigtoria.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            ViewData["Select"] = "INVENTORY";
+            States.MenuSelect = Menu.INVENTORY;
 
             var edit = new CreateProductViewModel()
             {

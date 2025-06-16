@@ -1,4 +1,5 @@
 ﻿using Bigtoria.Context;
+using Bigtoria.utils;
 using Bigtoria.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -19,7 +20,7 @@ namespace Bigtoria.Controllers
         [HttpGet]
         public async Task<IActionResult> Index(int filter = -2)
         {
-            ViewData["Select"] = "DELIVERY";
+            States.MenuSelect = Menu.DELIVERY;
 
             if (filter == -2)
             {
@@ -40,7 +41,7 @@ namespace Bigtoria.Controllers
         [HttpGet]
         public async Task<IActionResult> Detail(int id)
         {
-            ViewData["Select"] = "DELIVERY";
+            States.MenuSelect = Menu.DELIVERY;
             var delivery = await _context.Delivery.Where(d => d.Id == id)
                                             .Select(d => new DeliveryViewModel
                                             {

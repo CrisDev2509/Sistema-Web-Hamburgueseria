@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Bigtoria.utils
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="utf-8" />
@@ -21,17 +22,17 @@
         <div class="h-sep"></div>
         <div class="m-body">
             <ul class="menu-item">
-                <li><a class="@(ViewData["Select"]?.ToString() == "HOME" ? "select-item" : "")" asp-controller="Home" asp-action="Index"><i class="fa-solid fa-table-cells-large fa-xl"></i><span>HOME</span></a></li>
-                <li><a class="@(ViewData["Select"]?.ToString() == "SALES" ? "select-item" : "")" asp-controller="Sale" asp-action="Index"><i class="fa-solid fa-tag fa-xl"></i><span>VENTAS</span></a></li>
-                <li><a class="@(ViewData["Select"]?.ToString() == "DELIVERY" ? "select-item" : "")" asp-controller="Delivery" asp-action="Index"><i class="fa-solid fa-truck-fast fa-xl"></i><span>PEDIDOS</span></a></li>
-                <li><a class="@(ViewData["Select"]?.ToString() == "INVENTORY" ? "select-item" : "")" asp-controller="Inventory" asp-action="Index"><i class="fa-solid fa-list-check fa-xl"></i><span>INVENTARIO</span></a></li>
-                <li><a class="@(ViewData["Select"]?.ToString() == "SUPPLIER" ? "select-item" : "")" asp-controller="Supplier" asp-action="Index"><i class="fa-solid fa-boxes-packing fa-xl"></i><span>PROVEDORES</span></a></li>
-                <li><a class="@(ViewData["Select"]?.ToString() == "REPORTS" ? "select-item" : "")" asp-controller="Report" asp-action="Index"><i class="fa-solid fa-chart-pie fa-xl"></i><span>REPORTES</span></a></li>
+                <li><a class="@(States.MenuSelect == Menu.HOME ? "select-item" : "")" asp-controller="Home" asp-action="Index"><i class="fa-solid fa-table-cells-large fa-xl"></i><span>HOME</span></a></li>
+                <li><a class="@(States.MenuSelect == Menu.SALE ? "select-item" : "")" asp-controller="Sale" asp-action="Index"><i class="fa-solid fa-tag fa-xl"></i><span>VENTAS</span></a></li>
+                <li><a class="@(States.MenuSelect == Menu.DELIVERY ? "select-item" : "")" asp-controller="Delivery" asp-action="Index"><i class="fa-solid fa-truck-fast fa-xl"></i><span>PEDIDOS</span></a></li>
+                <li><a class="@(States.MenuSelect == Menu.INVENTORY ? "select-item" : "")" asp-controller="Inventory" asp-action="Index"><i class="fa-solid fa-list-check fa-xl"></i><span>INVENTARIO</span></a></li>
+                <li><a class="@(States.MenuSelect == Menu.SUPPLIER ? "select-item" : "")" asp-controller="Supplier" asp-action="Index"><i class="fa-solid fa-boxes-packing fa-xl"></i><span>PROVEDORES</span></a></li>
+                <li><a class="@(States.MenuSelect == Menu.REPORT ? "select-item" : "")" asp-controller="Report" asp-action="Index"><i class="fa-solid fa-chart-pie fa-xl"></i><span>REPORTES</span></a></li>
                 @if (User.Claims.Where(c => c.Type == "EmployeeId").Select(c => c.Value).FirstOrDefault()?.ToString() == "1")
                 {
-                    <li><a class="@(ViewData["Select"]?.ToString() == "EMPLOYEE" ? "select-item" : "")" asp-controller="Employee" asp-action="Index"><i class="fa-solid fa-users fa-xl"></i><span>EMPLEADOS</span></a></li>
+                    <li><a class="@(States.MenuSelect == Menu.USERS ? "select-item" : "")" asp-controller="Employee" asp-action="Index"><i class="fa-solid fa-users fa-xl"></i><span>EMPLEADOS</span></a></li>
                 }
-                <li><a class="@(ViewData["Select"]?.ToString() == "ACCOUNT" ? "select-item" : "")" asp-controller="Account" asp-action="Index"><i class="fa-solid fa-user fa-xl"></i><span>CUENTA</span></a></li>
+                <li><a class="@(States.MenuSelect == Menu.ACCOUNT ? "select-item" : "")" asp-controller="Account" asp-action="Index"><i class="fa-solid fa-user fa-xl"></i><span>CUENTA</span></a></li>
             </ul>
         </div>
         <div class="h-sep"></div>
