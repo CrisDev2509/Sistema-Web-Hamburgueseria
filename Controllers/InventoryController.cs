@@ -79,66 +79,6 @@ namespace Bigtoria.Controllers
             };
             return View(create);
         }
-
-        [HttpGet]
-        public async Task<IActionResult> Detail(int id)
-        {
-            States.MenuSelect = Menu.INVENTORY;
-
-            var product = await _context.Products.Where(p => p.Id == id)
-                                    .Select(p => new ProductViewModel
-                                    {
-                                        Id= p.Id,
-                                        Name= p.Name,
-                                        Description = p.Description,
-                                        Price = p.Price,
-                                        Stock = p.Stock,
-                                        Discount = p.Discount,
-                                        ImagePath = p.ImagePath,
-                                        CategoryName = p.Category.Name,
-                                        ShowStore = p.ShowStore
-                                    }).FirstOrDefaultAsync();
-
-            if (product == null) return NotFound();
-
-            return View(product);
-        }
-
-        [Authorize(Roles = "GERENTE, ADMINISTRADOR")]
-        [HttpGet]
-        public async Task<IActionResult> Edit(int id)
-        {
-            States.MenuSelect = Menu.INVENTORY;
-
-            var edit = new CreateProductViewModel()
-            {
-                Categories = await _context.Categories.Select(c => new CategoryViewModel
-                {
-                    Id = c.Id,
-                    Name = c.Name,
-                    State = c.Status
-                }).ToListAsync(),
-                Product = await _context.Products.Where(p => p.Id==id)
-                                    .Select(p => new ProductViewModel
-                                    {
-                                        Id = p.Id,
-                                        Name= p.Name,
-                                        Description = p.Description,
-                                        Price = p.Price,
-                                        Stock = p.Stock,
-                                        Discount = p.Discount,
-                                        ImagePath = p.ImagePath,
-                                        CategoryName = p.Category.Name,
-                                        ShowStore = p.ShowStore
-                                    }).FirstOrDefaultAsync()
-            };
-
-            if (edit == null || edit.Product == null) return NotFound();
-
-            return View(edit);
-        }
-
-        //Post
         [Authorize(Roles = "GERENTE, ADMINISTRADOR")]
         [HttpPost]
         public async Task<IActionResult> Create(ProductViewModel model)
@@ -217,6 +157,64 @@ namespace Bigtoria.Controllers
             return View(create);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Detail(int id)
+        {
+            States.MenuSelect = Menu.INVENTORY;
+
+            var product = await _context.Products.Where(p => p.Id == id)
+                                    .Select(p => new ProductViewModel
+                                    {
+                                        Id= p.Id,
+                                        Name= p.Name,
+                                        Description = p.Description,
+                                        Price = p.Price,
+                                        Stock = p.Stock,
+                                        Discount = p.Discount,
+                                        ImagePath = p.ImagePath,
+                                        CategoryName = p.Category.Name,
+                                        ShowStore = p.ShowStore
+                                    }).FirstOrDefaultAsync();
+
+            if (product == null) return NotFound();
+
+            return View(product);
+        }
+
+        [Authorize(Roles = "GERENTE, ADMINISTRADOR")]
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            States.MenuSelect = Menu.INVENTORY;
+
+            var edit = new CreateProductViewModel()
+            {
+                Categories = await _context.Categories.Select(c => new CategoryViewModel
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    State = c.Status
+                }).ToListAsync(),
+                Product = await _context.Products.Where(p => p.Id==id)
+                                    .Select(p => new ProductViewModel
+                                    {
+                                        Id = p.Id,
+                                        Name= p.Name,
+                                        Description = p.Description,
+                                        Price = p.Price,
+                                        Stock = p.Stock,
+                                        Discount = p.Discount,
+                                        ImagePath = p.ImagePath,
+                                        CategoryName = p.Category.Name,
+                                        ShowStore = p.ShowStore
+                                    }).FirstOrDefaultAsync()
+            };
+
+            if (edit == null || edit.Product == null) return NotFound();
+
+            return View(edit);
+        }
+
         [Authorize(Roles = "GERENTE, ADMINISTRADOR")]
         [HttpPost]
         public async Task<IActionResult> Edit(ProductViewModel model)
@@ -249,7 +247,7 @@ namespace Bigtoria.Controllers
                 }
 
                 var prod = await _context.Products.FirstOrDefaultAsync(p => p.Id == model.Id);
-                
+
                 if (prod == null) return NotFound();
 
                 if (model.Image != null && model.Image.Length > 0)
@@ -290,6 +288,8 @@ namespace Bigtoria.Controllers
 
             return View(edit);
         }
+
+        //Post
 
         [Authorize(Roles = "GERENTE, ADMINISTRADOR")]
         [HttpDelete]

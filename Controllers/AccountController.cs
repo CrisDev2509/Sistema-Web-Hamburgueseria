@@ -95,6 +95,64 @@ namespace Bigtoria.Controllers
         }
 
         [Authorize(Roles = "GERENTE, ADMINISTRADOR")]
+        [HttpPost]
+        public async Task<IActionResult> Create(AccountViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                var email = await _context.LoginEmpleyoee.Where(e => e.Email.ToUpper() == model.Email.ToUpper())
+                                                        .Select(e => e.Email)
+                                                        .FirstOrDefaultAsync();
+
+                if (email != null)
+                {
+                    TempData["Message"] = "Ya existe este correo";
+                    goto ret;
+                }
+
+
+                if (model.Password != model.RepeatPassword)
+                {
+                    TempData["Message"] = "Contraseñas no coinciden";
+                    goto ret;
+                }
+
+
+                LoginEmployee le = new LoginEmployee()
+                {
+                    Email = model.Email,
+                    Password = model.Password,
+                    EmployeeId = model.userId
+                };
+
+                await _context.LoginEmpleyoee.AddAsync(le);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("Index");
+            }
+
+            TempData["Message"] = "Error al crear la cuenta";
+
+        ret:
+            var employees = new CreateAccountViewModel()
+            {
+                Employee = await _context.Employees.Where(e => e.EmployeeType == null)
+                                            .Select(e => new EmployeeViewModel
+                                            {
+                                                Id = e.Id,
+                                                Name = e.Name,
+                                                Lastname = e.Lastname,
+                                                Email = e.Email,
+                                            }).ToListAsync(),
+                Account = model
+
+            };
+
+            return View(employees);
+        }
+
+        [Authorize(Roles = "GERENTE, ADMINISTRADOR")]
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
@@ -115,6 +173,44 @@ namespace Bigtoria.Controllers
                                                     .FirstOrDefaultAsync();
 
             return View(employees);
+        }
+
+        [Authorize(Roles = "GERENTE, ADMINISTRADOR")]
+        [HttpPost]
+        public async Task<IActionResult> Edit(CreateAccountViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var email = await _context.LoginEmpleyoee.Where(e => e.Email.ToUpper() == model.Account.Email.ToUpper())
+                                                        .Select(e => e.Email)
+                                                        .FirstOrDefaultAsync();
+
+                if (email != null)
+                {
+                    TempData["Message"] = "Ya existe este correo";
+                    goto ret;
+                }
+
+                if (model.Account.Password != model.Account.RepeatPassword)
+                {
+                    TempData["Message"] = "Las contraseñas no coinciden";
+                    goto ret;
+                }
+
+                var le = await _context.LoginEmpleyoee.FirstOrDefaultAsync(le => le.Id == model.Account.Id);
+                if (le == null) return NotFound();
+
+                le.Email = model.Account.Email;
+                le.Password = model.Account.Password;
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("Index");
+            }
+
+            TempData["Message"] = "Error al actualizar la cuenta";
+
+        ret:
+            return View(model);
         }
 
         [Authorize(Roles = "GERENTE, ADMINISTRADOR")]
@@ -170,102 +266,6 @@ namespace Bigtoria.Controllers
             }
 
             return RedirectToAction("Index");
-        }
-
-        [Authorize(Roles = "GERENTE, ADMINISTRADOR")]
-        [HttpPost]
-        public async Task<IActionResult> Create(AccountViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-
-                var email = await _context.LoginEmpleyoee.Where(e => e.Email.ToUpper() == model.Email.ToUpper())
-                                                        .Select(e => e.Email)
-                                                        .FirstOrDefaultAsync();
-
-                if (email != null)
-                {
-                    TempData["Message"] = "Ya existe este correo";
-                    goto ret;
-                }
-
-
-                if (model.Password != model.RepeatPassword)
-                {
-                    TempData["Message"] = "Contraseñas no coinciden";
-                    goto ret;
-                }
-
-
-                LoginEmployee le = new LoginEmployee()
-                {
-                    Email = model.Email,
-                    Password = model.Password,
-                    EmployeeId = model.userId
-                };
-
-                await _context.LoginEmpleyoee.AddAsync(le);
-                await _context.SaveChangesAsync();
-
-                return RedirectToAction("Index");
-            }
-
-            TempData["Message"] = "Error al crear la cuenta";
-
-            ret:
-            var employees = new CreateAccountViewModel()
-            {
-                Employee = await _context.Employees.Where(e => e.EmployeeType == null)
-                                            .Select(e => new EmployeeViewModel
-                                            {
-                                                Id = e.Id,
-                                                Name = e.Name,
-                                                Lastname = e.Lastname,
-                                                Email = e.Email,
-                                            }).ToListAsync(),
-                Account = model
-
-            };
-
-            return View(employees);
-        }
-
-        [Authorize(Roles = "GERENTE, ADMINISTRADOR")]
-        [HttpPost]
-        public async Task<IActionResult> Edit(CreateAccountViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var email = await _context.LoginEmpleyoee.Where(e => e.Email.ToUpper() == model.Account.Email.ToUpper())
-                                                        .Select(e => e.Email)
-                                                        .FirstOrDefaultAsync();
-
-                if (email != null)
-                {
-                    TempData["Message"] = "Ya existe este correo";
-                    goto ret;
-                }
-
-                if (model.Account.Password != model.Account.RepeatPassword)
-                {
-                    TempData["Message"] = "Las contraseñas no coinciden";
-                    goto ret;
-                }
-
-                var le = await _context.LoginEmpleyoee.FirstOrDefaultAsync(le => le.Id == model.Account.Id);
-                if (le == null) return NotFound();
-
-                le.Email = model.Account.Email;
-                le.Password = model.Account.Password;
-                await _context.SaveChangesAsync();
-
-                return RedirectToAction("Index");
-            }
-
-            TempData["Message"] = "Error al actualizar la cuenta";
-
-            ret:
-            return View(model);
         }
 
         [Authorize(Roles = "GERENTE, ADMINISTRADOR")]

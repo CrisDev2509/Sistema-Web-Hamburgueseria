@@ -59,74 +59,6 @@ namespace Bigtoria.Controllers
             return View(model);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Edit(int id)
-        {
-            States.MenuSelect = Menu.USERS;
-            var model = await _context.Employees.Where(e => e.Id == id)
-                                .Select(e => new CreateEmployeeViewModel
-                                {
-                                    Employee = new EmployeeViewModel
-                                    {
-                                        Id = e.Id,
-                                        Name = e.Name,
-                                        Lastname = e.Lastname,
-                                        Birthdate = DateTime.Parse(e.Birthdate),
-                                        Email = e.Email,
-                                        Phone = e.Phone,
-                                        Salary = e.Salary,
-                                        ContractDate = e.ContractDate,
-                                        ImagePath = e.ImagePath,
-                                        Status = e.Status,
-                                        CategoryType = new CategoryTypeViewModel
-                                        {
-                                            IdCategoryType = e.EmployeeType.Id,
-                                            Name = e.EmployeeType.Name
-                                        }
-                                    },
-                                    Categories = _context.EmployeesType.Where(et => et.Id != 1)
-                                                            .Select(et => new CategoryTypeViewModel
-                                                            {
-                                                                IdCategoryType = et.Id,
-                                                                Name = et.Name
-                                                            })
-                                                            .ToList()
-                                })
-                                .FirstOrDefaultAsync();
-
-            if (model == null) return NotFound();
-
-            return View(model);
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> Detail(int id)
-        {
-            var model = await _context.Employees.Where(_e => _e.Id == id)
-                                    .Select(e => new EmployeeViewModel
-                                    {
-                                        Id = e.Id,
-                                        Name = e.Name,
-                                        Lastname = e.Lastname,
-                                        Birthdate = DateTime.Parse(e.Birthdate),
-                                        Email = e.Email,
-                                        Phone = e.Phone,
-                                        Salary = e.Salary,
-                                        ContractDate = e.ContractDate,
-                                        ImagePath = e.ImagePath,
-                                        Status = e.Status,
-                                        CategoryType = new CategoryTypeViewModel
-                                        {
-                                            IdCategoryType = e.EmployeeType.Id,
-                                            Name = e.EmployeeType.Name
-                                        }
-                                    }).FirstOrDefaultAsync();
-            if (model == null) return NotFound();
-
-            return View(model);
-        }
-
-        //Metodos POST
         [HttpPost]
         public async Task<IActionResult> Create(EmployeeViewModel model)
         {
@@ -136,8 +68,8 @@ namespace Bigtoria.Controllers
                 if (model.CategoryType.IdCategoryType == 0)
                 {
                     var check = await _context.EmployeesType.Where(et => et.Name.ToUpper() == model.CategoryType.Name.ToUpper())
-                                                        .FirstOrDefaultAsync(); 
-                    
+                                                        .FirstOrDefaultAsync();
+
                     if (check == null)
                     {
                         EmployeeType et = new EmployeeType()
@@ -194,15 +126,55 @@ namespace Bigtoria.Controllers
             return View(viewModel);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            States.MenuSelect = Menu.USERS;
+            var model = await _context.Employees.Where(e => e.Id == id)
+                                .Select(e => new CreateEmployeeViewModel
+                                {
+                                    Employee = new EmployeeViewModel
+                                    {
+                                        Id = e.Id,
+                                        Name = e.Name,
+                                        Lastname = e.Lastname,
+                                        Birthdate = DateTime.Parse(e.Birthdate),
+                                        Email = e.Email,
+                                        Phone = e.Phone,
+                                        Salary = e.Salary,
+                                        ContractDate = e.ContractDate,
+                                        ImagePath = e.ImagePath,
+                                        Status = e.Status,
+                                        CategoryType = new CategoryTypeViewModel
+                                        {
+                                            IdCategoryType = e.EmployeeType.Id,
+                                            Name = e.EmployeeType.Name
+                                        }
+                                    },
+                                    Categories = _context.EmployeesType.Where(et => et.Id != 1)
+                                                            .Select(et => new CategoryTypeViewModel
+                                                            {
+                                                                IdCategoryType = et.Id,
+                                                                Name = et.Name
+                                                            })
+                                                            .ToList()
+                                })
+                                .FirstOrDefaultAsync();
+
+            if (model == null) return NotFound();
+
+            return View(model);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Edit(CreateEmployeeViewModel model)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
 
                 var employee = await _context.Employees.SingleOrDefaultAsync(e => e.Id == model.Employee.Id);
 
-                if(employee == null) return NotFound();
+                if (employee == null) return NotFound();
 
                 int idType = 0;
                 if (model.Employee.CategoryType.IdCategoryType == 0)
@@ -246,6 +218,33 @@ namespace Bigtoria.Controllers
 
                 return RedirectToAction("Index");
             }
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Detail(int id)
+        {
+            var model = await _context.Employees.Where(_e => _e.Id == id)
+                                    .Select(e => new EmployeeViewModel
+                                    {
+                                        Id = e.Id,
+                                        Name = e.Name,
+                                        Lastname = e.Lastname,
+                                        Birthdate = DateTime.Parse(e.Birthdate),
+                                        Email = e.Email,
+                                        Phone = e.Phone,
+                                        Salary = e.Salary,
+                                        ContractDate = e.ContractDate,
+                                        ImagePath = e.ImagePath,
+                                        Status = e.Status,
+                                        CategoryType = new CategoryTypeViewModel
+                                        {
+                                            IdCategoryType = e.EmployeeType.Id,
+                                            Name = e.EmployeeType.Name
+                                        }
+                                    }).FirstOrDefaultAsync();
+            if (model == null) return NotFound();
 
             return View(model);
         }

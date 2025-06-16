@@ -35,54 +35,6 @@ namespace Bigtoria.Controllers
             return View();
         }
 
-        //Post methods
-        [HttpPost]
-        public async Task<IActionResult> addCard(int id)
-        {
-            var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
-            if (product == null) return NotFound();
-
-            if (SalesProduct.products.Where(p => p.Id == product.Id).FirstOrDefault() != null)
-            {
-                if (product.Stock > 0)
-                {
-                    SaleProductViewModel? spvm = SalesProduct.products.Where(p => p.Id == product.Id).FirstOrDefault();
-
-                    if (spvm != null)
-                        spvm.Quantity++;
-                }
-                else
-                {
-                    return RedirectToAction("Index");
-                }
-            }
-            else
-            {
-                if (product.Stock > 0)
-                {
-                    SaleProductViewModel spvm = new SaleProductViewModel()
-                    {
-                        Id = product.Id,
-                        Name = product.Name,
-                        Discount = product.Discount,
-                        Price = product.Price,
-                        Quantity = 1
-                    };
-
-                    SalesProduct.products.Add(spvm);
-                }
-                else
-                {
-                    return RedirectToAction("Index");
-                }
-            }
-
-            product.Stock--;
-            await _context.SaveChangesAsync();
-
-            return Ok();
-        }
-
         [HttpPost]
         public async Task<IActionResult> Shop(VoucherViewModel model)
         {
@@ -156,7 +108,7 @@ namespace Bigtoria.Controllers
 
                         TempData["Message"] = $"Venta exitosa, orden N° {idDel}";
 
-                        return RedirectToAction("Invoice", "Report", new {id = sale.Entity.Id, isSale = true });
+                        return RedirectToAction("Invoice", "Report", new { id = sale.Entity.Id, isSale = true });
                     }
                     else
                     {
@@ -175,6 +127,54 @@ namespace Bigtoria.Controllers
 
                 return RedirectToAction("Shop", "UserCard");
             }
+        }
+
+        //Post methods
+        [HttpPost]
+        public async Task<IActionResult> addCard(int id)
+        {
+            var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
+            if (product == null) return NotFound();
+
+            if (SalesProduct.products.Where(p => p.Id == product.Id).FirstOrDefault() != null)
+            {
+                if (product.Stock > 0)
+                {
+                    SaleProductViewModel? spvm = SalesProduct.products.Where(p => p.Id == product.Id).FirstOrDefault();
+
+                    if (spvm != null)
+                        spvm.Quantity++;
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+            else
+            {
+                if (product.Stock > 0)
+                {
+                    SaleProductViewModel spvm = new SaleProductViewModel()
+                    {
+                        Id = product.Id,
+                        Name = product.Name,
+                        Discount = product.Discount,
+                        Price = product.Price,
+                        Quantity = 1
+                    };
+
+                    SalesProduct.products.Add(spvm);
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+
+            product.Stock--;
+            await _context.SaveChangesAsync();
+
+            return Ok();
         }
 
         //Private methods

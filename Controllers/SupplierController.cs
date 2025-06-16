@@ -43,69 +43,6 @@ namespace Bigtoria.Controllers
             return View();
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Edit(int id)
-        {
-            States.MenuSelect = Menu.SUPPLIER;
-            TempData["Message"] = null;
-            var supp = await _context.Suppliers.Where(s => s.Id == id).Select(s => new SupplierViewModel
-            {
-                Id = s.Id,
-                Name = s.Name,
-                Email = s.Email,
-                RUC = s.RUC
-            }).FirstOrDefaultAsync();
-
-            if(supp == null)
-            {
-                return RedirectToAction("Index");
-            }
-
-            return View(supp);
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> Delete(int id)
-        {
-            States.MenuSelect = Menu.SUPPLIER;
-            TempData["Message"] = null;
-            var supp = await _context.Suppliers.Where(s => s.Id == id).Select(s => new SupplierViewModel
-            {
-                Id = s.Id,
-                Name = s.Name,
-                Email = s.Email,
-                RUC = s.RUC
-            }).FirstOrDefaultAsync();
-
-            if (supp == null)
-            {
-                return RedirectToAction("Index");
-            }
-
-            return View(supp);
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> Detail(int id)
-        {
-            States.MenuSelect = Menu.SUPPLIER;
-            TempData["Message"] = null;
-            var supp = await _context.Suppliers.Where(s => s.Id == id).Select(s => new SupplierViewModel
-            {
-                Id = s.Id,
-                Name = s.Name,
-                Email = s.Email,
-                RUC = s.RUC
-            }).FirstOrDefaultAsync();
-
-            if (supp == null)
-            {
-                return RedirectToAction("Index");
-            }
-
-            return View(supp);
-        }
-
         [HttpPost]
         public async Task<IActionResult> Create(SupplierViewModel model)
         {
@@ -113,7 +50,7 @@ namespace Bigtoria.Controllers
             {
                 var supp = await _context.Suppliers.FirstOrDefaultAsync(s => s.RUC.Equals(model.RUC));
 
-                if(supp != null)
+                if (supp != null)
                 {
                     TempData["Message"] = "Ya existe proveedor con este RUC";
                     return View(model);
@@ -136,6 +73,27 @@ namespace Bigtoria.Controllers
                 TempData["Message"] = "Complete todos los campos";
                 return View(model);
             }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            States.MenuSelect = Menu.SUPPLIER;
+            TempData["Message"] = null;
+            var supp = await _context.Suppliers.Where(s => s.Id == id).Select(s => new SupplierViewModel
+            {
+                Id = s.Id,
+                Name = s.Name,
+                Email = s.Email,
+                RUC = s.RUC
+            }).FirstOrDefaultAsync();
+
+            if(supp == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return View(supp);
         }
 
         [HttpPost]
@@ -166,6 +124,27 @@ namespace Bigtoria.Controllers
             }
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            States.MenuSelect = Menu.SUPPLIER;
+            TempData["Message"] = null;
+            var supp = await _context.Suppliers.Where(s => s.Id == id).Select(s => new SupplierViewModel
+            {
+                Id = s.Id,
+                Name = s.Name,
+                Email = s.Email,
+                RUC = s.RUC
+            }).FirstOrDefaultAsync();
+
+            if (supp == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return View(supp);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Delete(SupplierViewModel model)
         {
@@ -173,10 +152,10 @@ namespace Bigtoria.Controllers
             {
                 var supp = await _context.Suppliers.FirstOrDefaultAsync(s => s.Id == model.Id);
 
-                if (supp == null) 
+                if (supp == null)
                     return RedirectToAction("Index");
 
-               _context.Suppliers.Remove(supp);
+                _context.Suppliers.Remove(supp);
                 await _context.SaveChangesAsync();
 
                 TempData["Message"] = "Proveedor eliminado";
@@ -188,6 +167,27 @@ namespace Bigtoria.Controllers
                 return View(model);
             }
 
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Detail(int id)
+        {
+            States.MenuSelect = Menu.SUPPLIER;
+            TempData["Message"] = null;
+            var supp = await _context.Suppliers.Where(s => s.Id == id).Select(s => new SupplierViewModel
+            {
+                Id = s.Id,
+                Name = s.Name,
+                Email = s.Email,
+                RUC = s.RUC
+            }).FirstOrDefaultAsync();
+
+            if (supp == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return View(supp);
         }
     }
 }
