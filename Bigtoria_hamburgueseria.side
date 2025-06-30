@@ -78,12 +78,10 @@
       "id": "a86bc831-687b-496d-9436-0aa0ef90a76a",
       "comment": "",
       "command": "assertElementPresent",
-      "target": "id=product-info",
+      "target": "css=.product-card:nth-child(1) > .product-card-info",
       "targets": [
-        ["id=product-info", "id"],
-        ["css=.product-card:nth-child(1) > #product-info", "css:finder"],
-        ["xpath=//div[@id='product-info']", "xpath:attributes"],
-        ["xpath=//div[2]/div/div[2]/div/div[2]", "xpath:position"]
+        ["css=.product-card:nth-child(1) > .product-card-info", "css:finder"],
+        ["xpath=//div[2]/div/div[2]/div/div", "xpath:position"]
       ],
       "value": ""
     }]
@@ -417,7 +415,7 @@
         ["xpath=//div[2]/a", "xpath:position"],
         ["xpath=//a[contains(.,'SIN ESTOCK')]", "xpath:innerText"]
       ],
-      "value": "30000"
+      "value": "3000"
     }, {
       "id": "f65a00e4-beb5-4099-ae95-20be16e8acf5",
       "comment": "",
@@ -536,39 +534,15 @@
       ],
       "value": ""
     }, {
-      "id": "e665f6ff-2a10-46fe-b705-8c6f6b77ee4a",
-      "comment": "",
-      "command": "waitForElementPresent",
-      "target": "id=product-info",
-      "targets": [
-        ["id=product-info", "id"],
-        ["css=.product-card:nth-child(1) > #product-info", "css:finder"],
-        ["xpath=//div[@id='product-info']", "xpath:attributes"],
-        ["xpath=//div[2]/div/div[2]/div/div[2]", "xpath:position"]
-      ],
-      "value": "30000"
-    }, {
-      "id": "bf6611e9-270b-4aed-8ada-1a5c799807d4",
-      "comment": "",
-      "command": "assertElementPresent",
-      "target": "id=product-info",
-      "targets": [
-        ["id=product-info", "id"],
-        ["css=.product-card:nth-child(1) > #product-info", "css:finder"],
-        ["xpath=//div[@id='product-info']", "xpath:attributes"],
-        ["xpath=//div[2]/div/div[2]/div/div[2]", "xpath:position"]
-      ],
-      "value": ""
-    }, {
       "id": "aa4311f1-3168-4c7c-9356-2c462fac1510",
       "comment": "",
       "command": "click",
-      "target": "id=product-info",
+      "target": "css=.product-card:nth-child(2) .btn-card-fill",
       "targets": [
-        ["id=product-info", "id"],
-        ["css=.product-card:nth-child(1) > #product-info", "css:finder"],
-        ["xpath=//div[@id='product-info']", "xpath:attributes"],
-        ["xpath=//div[2]/div/div[2]/div/div[2]", "xpath:position"]
+        ["css=.product-card:nth-child(2) .btn-card-fill", "css:finder"],
+        ["xpath=(//a[contains(text(),'Añadir a carrito')])[2]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/Sale/addCard/2')]", "xpath:href"],
+        ["xpath=//div[2]/div[2]/a", "xpath:position"]
       ],
       "value": ""
     }, {
